@@ -1,9 +1,9 @@
-## GreatReads
+# GreatReads
 
-# Project Description 
+## Project Description 
 
-# Members
+## Members
 
-# Pivotal Tracker
-
+## Pivotal Tracker
+https://www.pivotaltracker.com/n/projects/1446714
 
