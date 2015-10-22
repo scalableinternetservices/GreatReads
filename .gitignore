@@ -2,4 +2,7 @@
 !/log/.keep
 /tmp
 *.sqlite3
+.idea/
+*.swp
+public/system/
 
