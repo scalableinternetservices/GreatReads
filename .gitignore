@@ -2,4 +2,5 @@
 !/log/.keep
 /tmp
 *.sqlite3
+.idea/
 
