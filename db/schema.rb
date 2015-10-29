@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022214905) do
+ActiveRecord::Schema.define(version: 20151029221817) do
 
   create_table "books", force: :cascade do |t|
     t.datetime "created_at",          null: false
@@ -23,9 +23,25 @@ ActiveRecord::Schema.define(version: 20151022214905) do
     t.string   "title"
   end
 
+<<<<<<< HEAD
   create_table "followings", force: :cascade do |t|
     t.integer  "person_id"
     t.integer  "follower_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "on_shelves", force: :cascade do |t|
+    t.integer  "book_id"
+    t.integer  "shelf_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shelves", force: :cascade do |t|
+    t.integer  "shelf_id"
+    t.string   "shelf_name"
+    t.integer  "shelf_owner"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
