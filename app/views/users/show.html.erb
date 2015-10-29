@@ -3,7 +3,7 @@
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
 
-<%= render "profile", user: user %>
+<%= render "profile", user: @user %>
 <p>
   Email:
   <%= @user.email %>
