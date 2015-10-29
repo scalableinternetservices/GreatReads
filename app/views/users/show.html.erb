@@ -3,18 +3,4 @@
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
 
-<p>
-  Email:
-  <%= @user.email %>
-  <% unless current_user == @user %>
-      <% if current_user.follows?(@user) %>
-        <p>
-          unfollow
-        </p>
-    <% else %>
-        <p>
-          follow
-        </p>
-    <% end %>
-<% end %>
-</p>
+<%= render "profile", user: user %>

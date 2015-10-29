@@ -24,16 +24,14 @@ class FollowingsController < ApplicationController
   # POST /followings
   # POST /followings.json
   def create
-    @following = Following.new(following_params)
-
-    respond_to do |format|
-      if @following.save
-        format.html { redirect_to @following, notice: 'Following was successfully created.' }
-        format.json { render :show, status: :created, location: @following }
-      else
-        format.html { render :new }
-        format.json { render json: @following.errors, status: :unprocessable_entity }
-      end
+    person_id = params[:person_id]
+    @following = current_user.following.build(:person_id => person_id)
+    if @following.save
+      flash[:notice] = "Followed %s" % (User.find_by id: person_id).email
+      redirect_to root_url
+    else
+      flash[:notice] = "Failed to follow user. Please try again."
+      redirect_to root_url
     end
   end
 

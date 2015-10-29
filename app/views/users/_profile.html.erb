@@ -3,13 +3,9 @@
   <%= user.email %>
   <% unless current_user == user %>
       <% if current_user.follows?(user) %>
-        <p>
-          unfollow
-        </p>
+        <%= link_to "Unfollow", (current_user.following.find_by person_id: user.id), :method => :delete %>
     <% else %>
-        <p>
-          follow
-        </p>
+        <%= link_to "Follow", followings_path(:person_id => user.id), :method => :post %>
     <% end %>
 <% end %>
 </p>
