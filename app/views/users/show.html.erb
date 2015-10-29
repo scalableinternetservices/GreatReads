@@ -6,4 +6,12 @@
 <p>
   Email:
   <%= @user.email %>
+  <br>
+    Shelves:
+    <%= @shelves.each do |shelf| %>
+    <br>
+    Shelf:
+    <%= link_to shelf.shelf_name, shelf %>
+    <%end%>
 </p>
+
