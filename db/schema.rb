@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 20151029221817) do
     t.string   "title"
   end
 
+<<<<<<< HEAD
+  create_table "followings", force: :cascade do |t|
+    t.integer  "person_id"
+    t.integer  "follower_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "on_shelves", force: :cascade do |t|
     t.integer  "book_id"
     t.integer  "shelf_id"

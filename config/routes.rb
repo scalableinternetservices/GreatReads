@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :followings
   resources :shelves
   resources :on_shelves
   devise_for :users
