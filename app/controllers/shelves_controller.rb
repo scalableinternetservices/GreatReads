@@ -10,7 +10,10 @@ class ShelvesController < ApplicationController
   # GET /shelves/1
   # GET /shelves/1.json
   def show
-  end
+    @on_shelves = OnShelf.where(book_id: params[:id])
+    @book_ids = @on_shelves.map { |onshelf| onshelf.book_id }
+    @books = Book.where(id: @book_ids)
+    end
 
   # GET /shelves/new
   def new
