@@ -12,7 +12,7 @@ class ShelvesController < ApplicationController
   def show
     @on_shelves = OnShelf.where(book_id: params[:id])
     @book_ids = @on_shelves.map { |onshelf| onshelf.book_id }
-    @books = Book.where(book_id: @book_ids)
+    @books = Book.where(id: @book_ids)
     end
 
   # GET /shelves/new
