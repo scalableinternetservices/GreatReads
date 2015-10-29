@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :followings
   devise_for :users
   resources :users
   resources :books

@@ -1,0 +1,15 @@
+<p>
+  Email:
+  <%= user.email %>
+  <% unless current_user == user %>
+      <% if current_user.follows?(user) %>
+        <p>
+          unfollow
+        </p>
+    <% else %>
+        <p>
+          follow
+        </p>
+    <% end %>
+<% end %>
+</p>
