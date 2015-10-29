@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 20151029221817) do
     t.string   "title"
   end
 
-<<<<<<< HEAD
   create_table "followings", force: :cascade do |t|
     t.integer  "person_id"
     t.integer  "follower_id"
