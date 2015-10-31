@@ -11,6 +11,9 @@ class BooksController < ApplicationController
   # GET /books/1.json
   def show
     @comments = Comment.where(book_id: params[:id])
+    @new_comment = Comment.new(
+        book_id: params[:id],
+    )
   end
 
   # GET /books/new
