@@ -10,5 +10,13 @@
   <%= image_tag @book.avatar.url %>
 </p>
 
+<strong>Comments:</strong>
+<%= @comments.each do |comment| %>
+    <br>
+    Comment: <%= comment.body %>
+<%end%>
+<br>
+<br>
+
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
