@@ -9,4 +9,11 @@ class User < ActiveRecord::Base
   def follows?(other_user)
     self.following.find_by person_id: other_user.id
   end
+
+  def get_feed
+    Comment.where(
+        author_id: self.following.map { |u| u.id }
+    )
+  end
+
 end
