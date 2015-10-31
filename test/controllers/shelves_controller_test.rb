@@ -18,7 +18,7 @@ class ShelvesControllerTest < ActionController::TestCase
 
   test "should create shelf" do
     assert_difference('Shelf.count') do
-      post :create, shelf: { shelf_id: @shelf.shelf_id, shelf_name: @shelf.shelf_name, shelf_owner: @shelf.shelf_owner }
+      post :create, shelf: { shelf_name: @shelf.shelf_name, shelf_owner: @shelf.shelf_owner }
     end
 
     assert_redirected_to shelf_path(assigns(:shelf))
@@ -35,7 +35,7 @@ class ShelvesControllerTest < ActionController::TestCase
   end
 
   test "should update shelf" do
-    patch :update, id: @shelf, shelf: { shelf_id: @shelf.shelf_id, shelf_name: @shelf.shelf_name, shelf_owner: @shelf.shelf_owner }
+    patch :update, id: @shelf, shelf: { shelf_name: @shelf.shelf_name, shelf_owner: @shelf.shelf_owner }
     assert_redirected_to shelf_path(assigns(:shelf))
   end
 

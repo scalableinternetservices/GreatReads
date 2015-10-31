@@ -72,6 +72,6 @@ class ShelvesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shelf_params
-      params.require(:shelf).permit(:shelf_id, :shelf_name, :shelf_owner)
+      params.require(:shelf).permit(:shelf_name, :shelf_owner)
     end
 end

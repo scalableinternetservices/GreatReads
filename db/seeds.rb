@@ -8,27 +8,21 @@
 
 User.delete_all
 
-aman = User.new
-aman.email = "aman@aman.com"
-aman.password = "amanaman"
-aman.password_confirmation = "amanaman"
-aman.save!
+Shelf.delete_all
 
-lowell = User.new
-lowell.email = "lowell@lowell.com"
-lowell.password = "lowelllowell"
-lowell.password_confirmation = "lowelllowell"
-lowell.save!
+[:aman, :lowell, :akshay, :chang].each { |user|
+  user_name = user.to_s
+  new_user = User.new
+  new_user.email = "%s@%s.com" % [user_name, user_name]
+  new_user.password = "%s%s" % [user_name, user_name]
+  new_user.password_confirmation = "%s%s" % [user_name, user_name]
+  new_user.save!
 
-akshay = User.new
-akshay.email = "akshay@akshay.com"
-akshay.password = "akshayakshay"
-akshay.password_confirmation = "akshayakshay"
-akshay.save!
+  new_shelf = Shelf.new
+  new_shelf.shelf_name = "%s's shelf" % user_name
+  new_shelf.shelf_owner = new_user.id
+  new_shelf.save!
+}
 
-chang = User.new
-chang.email = "chang@chang.com"
-chang.password = "changchang"
-chang.password_confirmation = "changchang"
-chang.save!
+
 
