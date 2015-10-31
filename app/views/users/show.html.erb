@@ -5,7 +5,7 @@
 
 <%= render "profile", user: @user %>
 <p>
-  
+
   <% if current_user %>
       <%= form_for(Shelf.new) do |f| %>
         <div class="field">
@@ -19,9 +19,11 @@
 <% end %>
     <br>
     Shelves:
-    <%= @shelves.each do |shelf| %>
+    <% @shelves.each do |shelf| %>
         <br>
         Shelf:
         <%= link_to shelf.shelf_name, shelf %>
-    <%end%>
+
+    <% end %>
+
     </p>
