@@ -7,5 +7,15 @@
     <% else %>
         <%= link_to "Follow", followings_path(:person_id => user.id), :method => :post %>
     <% end %>
+  <% else %>
+      <%= form_for(Shelf.new) do |f| %>
+              <div class="field">
+        <%= f.hidden_field :shelf_owner, :value => current_user.id %>
+        <%= f.text_field :shelf_name %>
+      </div>
+            <div class="actions">
+        <%= f.submit %>
+      </div>
+        +<% end %>
 <% end %>
 </p>
