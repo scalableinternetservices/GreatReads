@@ -15,7 +15,6 @@
   <tbody>
     <% @shelves.each do |shelf| %>
       <tr>
-        <td><%= shelf.shelf_id %></td>
         <td><%= shelf.shelf_name %></td>
         <td><%= shelf.shelf_owner %></td>
         <td><%= link_to 'Show', shelf %></td>

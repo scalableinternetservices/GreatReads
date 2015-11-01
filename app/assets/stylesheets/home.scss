@@ -4,6 +4,17 @@ $color3: #333;
 $color4: #333;
 $color5: #333;
 
+#footer {
+	background-color: $color1;
+	h4 {
+		color: $color2;
+	}
+	color: $color2;
+	a {
+		color: $color2;
+	}
+}
+
 #banner {
 	background:
 		// linear-gradient(to bottom right, rgba(0, 47, 75, 0.6) , rgba(220, 66, 37, 0.6)),
