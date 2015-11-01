@@ -3,7 +3,15 @@
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
 
+<%= render "profile", user: @user %>
 <p>
   Email:
   <%= @user.email %>
+  <br>
+    Shelves:
+    <%= @shelves.each do |shelf| %>
+    <br>
+    Shelf:
+    <%= link_to shelf.shelf_name, shelf %>
+    <%end%>
 </p>
