@@ -1,24 +1,4 @@
-<style type="text/css">
-  body {
-    background-color: #DADADA;
-    height: 100%;
-  }
-  body > .grid {
-    height: 100%;
-  }
-  #new_user {
-    padding-top: 100px;
-  }
-  .image {
-    margin-top: -100px;
-  }
-  .column {
-    max-width: 450px;
-  }
-  .ui .input {
-    width: 100%;
-  }
-</style>
+<%= stylesheet_link_tag "devise" %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
@@ -27,7 +7,7 @@
     <div class="column">
       <h2 class="ui image header">
         <div class="content">
-          Sign-in to your account
+          Sign-in to GreatReads
         </div>
       </h2>
       <form class="ui large form">
