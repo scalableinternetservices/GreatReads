@@ -1,0 +1,45 @@
+<div class="ui large top menu" id="menu" style="height: 50px;" >
+  <div class="ui container">
+    <a class="toc item">
+      <i class="sidebar icon"></i>
+    </a>
+    <div class="item" style="padding: 0px;" id="title">
+      <%= link_to image_tag("title.png", :style => 'height: 50px;') %>
+    </div>
+    <div class="right menu">
+      <a href="<%= root_path %>" class="item <%= 'active' if local_assigns[:active] == 'home' %>">Home</a>
+      <a class="item <%= 'active' if local_assigns[:active] == 'about' %>">About</a>
+      <a href="<%= books_url %>" class="item <%= 'active' if local_assigns[:active] == 'books' %>">Browse Books</a>
+      <a href="<%= users_url %>" class="item <%= 'active' if local_assigns[:active] == 'users' %>">Community</a>
+      <div class="ui dropdown item">
+        My Profile
+        
+        
+        <i class="dropdown icon"></i>
+        <div class="menu">
+        	<a href="">
+	        	<div class="item" style="padding: 5px;">
+        			<img src=""/> 
+
+        			&nbsp;<b><%= current_user.email %></b>
+	        	</div>
+	        </a>
+        	<div class="divider"></div>
+            <div class="item"><i class="user icon"></i><%= link_to "View Profile", current_user %></div>
+          	<div class="item"><i class="pencil icon"></i> <%= link_to "Edit profile", edit_user_registration_path %></div>
+          	<div class="item"><i class="power icon"></i> <%= link_to "Sign out", destroy_user_session_path, :method => :delete %></div>
+          	
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/components/dropdown.min.js"></script>
+<script>
+$('.ui.menu .ui.dropdown').dropdown({
+  on: 'hover'
+});
+</script>
