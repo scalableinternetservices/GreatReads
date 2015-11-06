@@ -8,7 +8,6 @@
     </div>
     <div class="right menu">
       <a href="<%= root_path %>" class="item <%= 'active' if local_assigns[:active] == 'home' %>">Home</a>
-      <a class="item <%= 'active' if local_assigns[:active] == 'about' %>">About</a>
       <a href="<%= books_url %>" class="item <%= 'active' if local_assigns[:active] == 'books' %>">Browse Books</a>
       <a href="<%= users_url %>" class="item <%= 'active' if local_assigns[:active] == 'users' %>">Community</a>
       <div class="ui dropdown item">

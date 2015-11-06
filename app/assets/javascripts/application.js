@@ -15,7 +15,3 @@
 //= require turbolinks
 //= require_tree .
 
-
-$('.ui.menu .ui.dropdown').dropdown({
-  on: 'hover'
-});
