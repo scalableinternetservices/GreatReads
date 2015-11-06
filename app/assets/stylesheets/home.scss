@@ -1,8 +1,14 @@
-$color1: #E6D4A7;
-$color2: #825534;
-$color3: #333;
-$color4: #333;
-$color5: #333;
+@import "settings";
+@import "mixins";
+
+button.ui.button {
+	@include hoverActiveFocus(background, $color4);
+	background: $color3;
+	a {
+		color: $color1; 
+	}
+	@include vendorize(transition, background 350ms ease-in-out);
+}
 
 #footer {
 	background-color: $color1;
@@ -17,13 +23,17 @@ $color5: #333;
 
 #banner {
 	background:
-		// linear-gradient(to bottom right, rgba(0, 47, 75, 0.6) , rgba(220, 66, 37, 0.6)),
-		linear-gradient(to bottom right, rgba(54, 54, 44, 0.7) , rgba(93, 145, 125, 0.4)),
+		// linear-gradient(to bottom right, rgba(54, 54, 44, 0.7) , rgba(93, 145, 125, 0.4)),
+		linear-gradient(to bottom right, rgba(41, 41, 41, 0.7) , rgba(91, 120, 118, 0.7)),
+
 		url('https://images.unsplash.com/photo-1431608660976-4fe5bcc2112c?fit=crop&fm=jpg&h=700&ixlib=rb-0.3.5&q=80&w=1250'); 
 	background-size: cover;
 }
 
 #menu {
+	border-radius: 0;
+	z-index: 100;
+	// position:relative;
 	background-color: $color1;
 	height: 75px;
 	.toc.item {

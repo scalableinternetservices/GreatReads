@@ -5,6 +5,7 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.all
+    @book = Book.new
   end
 
   # GET /books/1
@@ -14,11 +15,6 @@ class BooksController < ApplicationController
     @new_comment = Comment.new(
         book_id: params[:id],
     )
-  end
-
-  # GET /books/new
-  def new
-    @book = Book.new
   end
 
   # GET /books/1/edit

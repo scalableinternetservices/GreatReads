@@ -8,8 +8,7 @@
       <%= link_to image_tag("title.png") %>
     </div>
     <div class="right menu">
-      <a class="active item">Home</a>
-      <a class="item">About</a>
+      <a href="<%= root_path %>" class="active item">Home</a>
       <div class="item">
         <button type="submit" class="ui button">
           <%= link_to "Sign in", new_user_session_path, :method => :get %>
@@ -24,14 +23,11 @@
   </div>
 </div>
 
-<!-- Sidebar Menu -->
 <div class="ui vertical inverted sidebar menu">
   <a class="active item">Home</a>
   <a class="item">About</a>
 </div>
 
-
-<!-- Page Contents -->
 <div class="pusher">
   <div id="banner" class="ui vertical masthead center aligned segment">
 
@@ -48,6 +44,7 @@
 
   </div>
 
+
   <div class="ui vertical stripe segment">
     <div class="ui middle aligned stackable grid container">
       <div class="row">
@@ -61,11 +58,6 @@
           <img src="http://placehold.it/200x100" class="ui large bordered rounded image">
         </div>
       </div>
-      <!-- <div class="row">
-        <div class="center aligned column">
-          <a class="ui huge button">Check Them Out</a>
-        </div>
-      </div> -->
     </div>
   </div>
 
