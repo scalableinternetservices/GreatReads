@@ -11,12 +11,12 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     @book = Book.new
-    File.open("#{Rails.root}/sample.pdf", "rb") do |io| 
-      reader = PDF::Reader.new(io)
-      reader.pages.each do |page|
-        Rails.logger.debug "log #{page.text}"
-      end
-    end
+    # File.open("#{Rails.root}/sample.pdf", "rb") do |io| 
+    #   reader = PDF::Reader.new(io)
+    #   reader.pages.each do |page|
+    #     Rails.logger.debug "log #{page.text}"
+    #   end
+    # end
 
 
     # Rails.logger.debug "#{io}" if Rails.logger.debug?
@@ -31,6 +31,13 @@ class BooksController < ApplicationController
     @new_comment = Comment.new(
         book_id: params[:id],
     )
+    Rails.logger.debug "PATH = #{@book.pdf}"
+    File.open("#{@book.pdf}", "rb") do |io| 
+      reader = PDF::Reader.new(io)
+      reader.pages.each do |page|
+        Rails.logger.debug "log #{page.text}"
+      end
+    end
   end
 
   # GET /books/1/edit
