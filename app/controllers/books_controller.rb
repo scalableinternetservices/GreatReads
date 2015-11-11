@@ -11,17 +11,6 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     @book = Book.new
-    # File.open("#{Rails.root}/sample.pdf", "rb") do |io| 
-    #   reader = PDF::Reader.new(io)
-    #   reader.pages.each do |page|
-    #     Rails.logger.debug "log #{page.text}"
-    #   end
-    # end
-
-
-    # Rails.logger.debug "#{io}" if Rails.logger.debug?
-    
-    # puts reader.info
   end
 
   # GET /books/1
@@ -32,7 +21,7 @@ class BooksController < ApplicationController
         book_id: params[:id],
     )
     Rails.logger.debug "PATH = #{@book.pdf}"
-    File.open("#{@book.pdf}", "rb") do |io| 
+    open("#{@book.pdf}", "rb") do |io| 
       reader = PDF::Reader.new(io)
       reader.pages.each do |page|
         Rails.logger.debug "log #{page.text}"
