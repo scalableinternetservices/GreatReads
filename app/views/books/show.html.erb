@@ -11,8 +11,11 @@
 
 <p>
   <strong>PDF:</strong>
+  <%= link_to "display using the full viewer", pdfjs.full_path(file: "#{@book.pdf}") %>
+  <%= pdfjs_viewer pdf_url: "#{@book.pdf}", style: :full %>
+  <br>
   <object data="<%= @book.pdf %>" type="application/x-pdf" title="SamplePdf" width="500" height="720">
-      <a href="<%= @book.pdf %>">shree</a> 
+      <a href="<%= @book.pdf %>">link to og file</a> 
   </object>
 </p>
 
