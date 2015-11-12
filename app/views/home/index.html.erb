@@ -1,3 +1,5 @@
+<%= render :partial => "layouts/navbar", :locals => { :active => "home" } %>
+
 <% if current_user %>
  <%= render 'signedin' %>
 <% else %>
