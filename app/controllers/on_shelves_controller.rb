@@ -24,8 +24,7 @@ class OnShelvesController < ApplicationController
   # POST /on_shelves
   # POST /on_shelves.json
   def create
-    @on_shelf = OnShelf.new(on_shelf_params)
-
+    @on_shelf = OnShelf.new(:book_id => params[:book_id], :shelf_id => params[:shelf_id])
     respond_to do |format|
       if @on_shelf.save
         format.html { redirect_to @on_shelf, notice: 'On shelf was successfully created.' }
@@ -69,6 +68,7 @@ class OnShelvesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def on_shelf_params
-      params.require(:on_shelf).permit(:book_id, :shelf_id)
+      
+      params.require(:book_id).permit(:book_id, :shelf_id)
     end
 end

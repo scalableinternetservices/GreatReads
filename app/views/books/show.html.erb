@@ -10,6 +10,15 @@
   <%= image_tag @book.avatar.url %>
 </p>
 
+<strong>Your shelves</strong>
+<% @shelves.each do |shelf| %>
+  <%= shelf.shelf_name %>
+   Add to shelf
+  <%= link_to "Add book to shelf", on_shelves_path(:book_id => @book.id, :shelf_id => shelf.id), :method => :post %>
+<% end %>
+<br>
+<br>
+
 <strong>Comments:</strong>
 <% @comments.each do |comment| %>
     <br>
