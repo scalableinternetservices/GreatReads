@@ -14,16 +14,16 @@
 
 
   <load>
-    <arrivalphase phase="1" duration="30" unit="second">
+    <arrivalphase phase="1" duration="1" unit="second">
       <users arrivalrate="1" unit="second"></users>
     </arrivalphase>
+<!--
     <arrivalphase phase="2" duration="30" unit="second">
       <users arrivalrate="2" unit="second"></users>
     </arrivalphase>
     <arrivalphase phase="3" duration="30" unit="second">
       <users arrivalrate="4" unit="second"></users>
     </arrivalphase>
-<!--
    <arrivalphase phase="4" duration="30" unit="second">
      <users arrivalrate="8" unit="second"></users>
    </arrivalphase>
@@ -64,6 +64,35 @@
       <request>
         <http url='/' version='1.1' method='GET'></http>
       </request>
+
+      <!-- wait for up to 2 seconds -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- COMMENT: Chang this part works -->
+      <!-- get authenticity token from sign up page -->
+      <request>
+          <dyn_variable name="authenticity_token" ></dyn_variable> 
+          <http url="/users/sign_up" version="1.1" method="GET"></http>
+      </request>
+
+      <!-- COMMENT: Chang, this part might work, but not sure, it didn't yesterday but I realized that I was missing the subst="true" in the request, so try it out before asking for help -->
+      <!-- sign up a new user (currently hard-coding in the username password) -->
+      <request subst="true">
+          <dyn_variable name="response" re="(.*)"/>
+          <http url="/users"
+              method="POST"
+              version="1.1"
+              contents="utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;user%5Bemail%5D=coolperson%40cool.com&amp;user%5Bpassword%5D=coolcool&amp;commit=Sign+up"/>
+      </request>
+
+      <!-- logs all dynamic variables, very useful -->
+      <!-- COMMENT: Chang, this part is what will print the response, so you can see it when you run the tsung from ssh -->
+      <setdynvars sourcetype="eval" code="fun( {Pid, DynVars} ) ->
+          io:format([126, $p, 126, $n, 126, $n], [DynVars]),
+          ok end.">
+          <var name="dump" />
+      </setdynvars>
+
 
     </session>
   </sessions>
