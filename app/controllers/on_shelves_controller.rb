@@ -25,9 +25,10 @@ class OnShelvesController < ApplicationController
   # POST /on_shelves.json
   def create
     @on_shelf = OnShelf.new(:book_id => params[:book_id], :shelf_id => params[:shelf_id])
+    @book = Book.find_by(id: params[:book_id])
     respond_to do |format|
       if @on_shelf.save
-        format.html { redirect_to @on_shelf, notice: 'On shelf was successfully created.' }
+        format.html { redirect_to @book, notice: 'On shelf was successfully created.' }
         format.json { render :show, status: :created, location: @on_shelf }
       else
         format.html { render :new }
