@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="5924ec82.ngrok.com" port="80" type="tcp"></server>
+    <server host="20eb0b49.ngrok.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -87,12 +87,18 @@
       <!-- sign up a new user (currently hard-coding in the username password) -->
       <request subst="true">
           <dyn_variable name="response" re="(.*)"/>
+	  <dyn_variable name="user_url" re="[Ll]ocation: (http://.*)\r"/>
+	  <dyn_variable name="user_id" re='/users/(.*)">View Profile'/>
           <http url="/users"
               method="POST"
               version="1.1"
               contents="utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;user%5Bemail%5D=user%%_first%%%40%%_last%%.com&amp;user%5Bpassword%5D=password%%_first%%%%_last%%&amp;commit=Sign+up"/>
       </request>
-
+	
+      <request subst="true">
+        <http url="%%_user_url%%users/%%_user_id%%" method="DELETE">
+        </http>
+      </request>
 
       <!-- logs all dynamic variables, very useful -->
       <!-- COMMENT: Chang, this part is what will print the response, so you can see it when you run the tsung from ssh -->
