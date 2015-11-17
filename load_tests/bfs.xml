@@ -86,7 +86,7 @@
       <request subst="true">
           <dyn_variable name="response" re="(.*)"/>
 	  <dyn_variable name="user_url" re="[Ll]ocation: (http://.*)\r"/>
-	  <dyn_variable name="user_id" re='/users/(.*)">View Profile'/>
+	  <dyn_variable name="user_id" re="[Ll]ocation: http://.*?user_id=(.*)\r"/>
           <http url="/users"
               method="POST"
               version="1.1"
@@ -98,6 +98,13 @@
         <http 	url="/books" 
 		method="POST"
               	contents="book%5btitle%5D=book_for_user_%%_first%%%%_last%%"/>
+      </request>
+
+      <!-- create a new shelf-->
+      <request subst="true">
+        <http 	url="/shelves" 
+		method="POST"
+              	contents="shelf%5Bshelf_name%5D=shelf_for_user_%%_first%%%%_last%%&amp;shelf%5Bshelf_owner%5D=%%_user_id%%"/>
       </request>
 
       <!-- DELETE the user we just created -->
