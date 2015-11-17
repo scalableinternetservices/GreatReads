@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="20eb0b49.ngrok.com" port="80" type="tcp"></server>
+    <server host="3b50e342.ngrok.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -68,14 +68,13 @@
       <!-- wait for up to 2 seconds -->
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- COMMENT: Chang this part works -->
       <!-- get authenticity token from sign up page -->
       <request>
           <dyn_variable name="authenticity_token" ></dyn_variable> 
           <http url="/users/sign_up" version="1.1" method="GET"></http>
       </request>
 
-	<!-- create a random number to make a unique community name -->
+	<!-- create random numbers -->
       <setdynvars sourcetype="random_number" start="1000" end="9999999">
         <var name="first" />
       </setdynvars>
@@ -83,7 +82,6 @@
         <var name="last" />
       </setdynvars>
 
-      <!-- COMMENT: Chang, this part might work, but not sure, it didn't yesterday but I realized that I was missing the subst="true" in the request, so try it out before asking for help -->
       <!-- sign up a new user (currently hard-coding in the username password) -->
       <request subst="true">
           <dyn_variable name="response" re="(.*)"/>
@@ -95,13 +93,20 @@
               contents="utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;user%5Bemail%5D=user%%_first%%%40%%_last%%.com&amp;user%5Bpassword%5D=password%%_first%%%%_last%%&amp;commit=Sign+up"/>
       </request>
 	
+      <!-- create a new book-->
+      <request subst="true">
+        <http 	url="/books" 
+		method="POST"
+              	contents="book%5btitle%5D=book_for_user_%%_first%%%%_last%%"/>
+      </request>
+
+      <!-- DELETE the user we just created -->
       <request subst="true">
         <http url="%%_user_url%%users/%%_user_id%%" method="DELETE">
         </http>
       </request>
 
       <!-- logs all dynamic variables, very useful -->
-      <!-- COMMENT: Chang, this part is what will print the response, so you can see it when you run the tsung from ssh -->
       <setdynvars sourcetype="eval" code="fun( {Pid, DynVars} ) ->
           io:format([126, $p, 126, $n, 126, $n], [DynVars]),
           ok end.">
