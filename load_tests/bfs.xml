@@ -95,6 +95,7 @@
 	
       <!-- create a new book-->
       <request subst="true">
+	<dyn_variable name="book_id" re="[Ll]ocation: http://.*/(.*)\r"/>
         <http 	url="/books" 
 		method="POST"
               	contents="book%5btitle%5D=book_for_user_%%_first%%%%_last%%"/>
@@ -102,9 +103,17 @@
 
       <!-- create a new shelf-->
       <request subst="true">
+	<dyn_variable name="shelf_id" re="[Ll]ocation: http://.*/(.*)\r"/>
         <http 	url="/shelves" 
 		method="POST"
               	contents="shelf%5Bshelf_name%5D=shelf_for_user_%%_first%%%%_last%%&amp;shelf%5Bshelf_owner%5D=%%_user_id%%"/>
+      </request>
+
+      <!-- place the book we just created on the shelf we just created -->
+      <request subst="true">
+        <http 	url="/on_shelves" 
+		method="POST"
+              	contents="on_shelf%5Bshelf_id%5D=%%_shelf_id%%&amp;on_shelf%5Bbook_id%5D=%%_book_id%%"/>
       </request>
 
       <!-- DELETE the user we just created -->
