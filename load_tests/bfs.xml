@@ -85,7 +85,7 @@
       <!-- sign up a new user (currently hard-coding in the username password) -->
       <request subst="true">
           <dyn_variable name="response" re="(.*)"/>
-	  <dyn_variable name="user_url" re="[Ll]ocation: (http://.*)\r"/>
+	  <dyn_variable name="user_url" re="[Ll]ocation: (http://.*)\?"/>
 	  <dyn_variable name="user_id" re="[Ll]ocation: http://.*?user_id=(.*)\r"/>
           <http url="/users"
               method="POST"
