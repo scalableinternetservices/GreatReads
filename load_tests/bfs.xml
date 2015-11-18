@@ -116,6 +116,13 @@
               	contents="on_shelf%5Bshelf_id%5D=%%_shelf_id%%&amp;on_shelf%5Bbook_id%5D=%%_book_id%%"/>
       </request>
 
+      <!-- comment on the book we just created-->
+      <request subst="true">
+        <http 	url="/comments" 
+		method="POST"
+              	contents="comment%5Bauthor_id%5D=%%_user_id%%&amp;comment%5Bbook_id%5D=%%_book_id%%&amp;comment%5Bbody=comment_for_user_%%_first%%%%_last%%"/>
+      </request>
+
       <!-- view feed before leaving -->
       <request>
         <http url='/' version='1.1' method='GET'></http>
