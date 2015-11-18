@@ -135,6 +135,12 @@
         </http>
       </request>
 
+      <!-- delete the shelf -->
+      <request subst="true">
+        <http url="%%_root_url%%shelves/%%_shelf_id%%" method="DELETE">
+        </http>
+      </request>
+
       <!-- DELETE the user we just created -->
       <request subst="true">
         <http url="%%_root_url%%users/%%_user_id%%" method="DELETE">
