@@ -1,9 +1,4 @@
-require 'rubygems'
-require 'open-uri'
-
-
 class BooksController < ApplicationController
-
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   # GET /books
@@ -11,17 +6,6 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     @book = Book.new
-    File.open("#{Rails.root}/sample.pdf", "rb") do |io| 
-      reader = PDF::Reader.new(io)
-      reader.pages.each do |page|
-        Rails.logger.debug "log #{page.text}"
-      end
-    end
-
-
-    # Rails.logger.debug "#{io}" if Rails.logger.debug?
-    
-    # puts reader.info
   end
 
   # GET /books/1
