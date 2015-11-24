@@ -51,10 +51,3 @@ end
 gem 'paperclip'
 gem 'aws-sdk','< 2.0'
 gem 'fog'
-
-<<<<<<< HEAD
-=======
-# gem 'pdf-reader'
-# gem 'pdfjs_viewer-rails'
-
->>>>>>> a1ff849... Text form field input + no more pdfs
