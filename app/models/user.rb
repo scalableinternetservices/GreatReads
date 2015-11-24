@@ -23,4 +23,7 @@ class User < ActiveRecord::Base
     ).uniq.sort { |a, b| a.created_at <=> b.created_at }
   end
 
+  def self.random
+    User.offset(rand(User.count)).first
+  end
 end
