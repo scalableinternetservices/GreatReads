@@ -84,6 +84,20 @@
               version="1.1"
               contents="utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;user%5Bemail%5D=coolperson%40cool.com&amp;user%5Bpassword%5D=coolcool&amp;commit=Sign+up"/>
       </request>
+      
+      <request>
+        <http url='/books' version='1.1' method='GET'></http>
+      </request>
+
+      <request>
+        <dyn_variable name="person_to_follow_id" re='/followings?person_id=(.*)">'/>
+        <http url='/users/discover' version='1.1' method='GET'></http>
+      </request>
+
+      <request subst="true">
+        <http url='/followings?person_id=%%_person_to_follow_id' version='1.1' method='POST'></http>
+      </request>
+
 
       <!-- logs all dynamic variables, very useful -->
       <!-- COMMENT: Chang, this part is what will print the response, so you can see it when you run the tsung from ssh -->
