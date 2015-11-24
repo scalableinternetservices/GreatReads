@@ -9,12 +9,12 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="YOU FORGOT TO SPECIFY THE HOST" port="80" type="tcp"></server>
+    <server host="61374620.ngrok.com" port="80" type="tcp"></server>
   </servers>
 
 
   <load>
-    <arrivalphase phase="1" duration="1" unit="second">
+    <arrivalphase phase="1" duration="10" unit="second">
       <users arrivalrate="1" unit="second"></users>
     </arrivalphase>
 <!--
@@ -68,39 +68,112 @@
       <!-- wait for up to 2 seconds -->
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- COMMENT: Chang this part works -->
       <!-- get authenticity token from sign up page -->
       <request>
           <dyn_variable name="authenticity_token" ></dyn_variable> 
           <http url="/users/sign_up" version="1.1" method="GET"></http>
       </request>
 
-      <!-- COMMENT: Chang, this part might work, but not sure, it didn't yesterday but I realized that I was missing the subst="true" in the request, so try it out before asking for help -->
+	<!-- create random numbers -->
+      <setdynvars sourcetype="random_number" start="1000" end="9999999">
+        <var name="first" />
+      </setdynvars>
+      <setdynvars sourcetype="random_number" start="1000" end="9999999">
+        <var name="last" />
+      </setdynvars>
+
       <!-- sign up a new user (currently hard-coding in the username password) -->
       <request subst="true">
           <dyn_variable name="response" re="(.*)"/>
+	  <dyn_variable name="root_url" re="[Ll]ocation: (http://.*)\?"/>
+	  <dyn_variable name="user_id" re="[Ll]ocation: http://.*?user_id=(.*)\r"/>
           <http url="/users"
               method="POST"
               version="1.1"
-              contents="utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;user%5Bemail%5D=coolperson%40cool.com&amp;user%5Bpassword%5D=coolcool&amp;commit=Sign+up"/>
+              contents="utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;user%5Bemail%5D=user%%_first%%%40%%_last%%.com&amp;user%5Bpassword%5D=password%%_first%%%%_last%%&amp;commit=Sign+up"/>
       </request>
-      
-      <request>
-        <http url='/books' version='1.1' method='GET'></http>
-      </request>
-
-      <request>
-        <dyn_variable name="person_to_follow_id" re='/followings?person_id=(.*)">'/>
-        <http url='/users/discover' version='1.1' method='GET'></http>
-      </request>
-
+	
+      <!-- follow a user-->
+      <!-- 
+           -->
       <request subst="true">
-        <http url='/followings?person_id=%%_person_to_follow_id' version='1.1' method='POST'></http>
+	<dyn_variable name="following_id" re="[Ll]ocation: http://.*/(.*)\r"/>
+        <http 	url="/followings" 
+		method="POST"
+              	contents="following%5bperson_id%5D=2&amp;following%5Bfollower_id=%%_user_id%%"/>
       </request>
 
+      <!-- create a new book-->
+      <!-- 
+           -->
+      <request subst="true">
+	<dyn_variable name="book_id" re="[Ll]ocation: http://.*/(.*)\r"/>
+        <http 	url="/books" 
+		method="POST"
+              	contents="book%5btitle%5D=book_for_user_%%_first%%%%_last%%"/>
+      </request>
+
+      <!-- create a new shelf-->
+      <!-- 
+           -->
+      <request subst="true">
+	<dyn_variable name="shelf_id" re="[Ll]ocation: http://.*/(.*)\r"/>
+        <http 	url="/shelves" 
+		method="POST"
+              	contents="shelf%5Bshelf_name%5D=shelf_for_user_%%_first%%%%_last%%&amp;shelf%5Bshelf_owner%5D=%%_user_id%%"/>
+      </request>
+
+      <!-- place the book we just created on the shelf we just created -->
+      <!-- 
+           -->
+      <request subst="true">
+	<dyn_variable name="on_shelf_id" re="[Ll]ocation: http://.*/(.*)\r"/>
+        <http 	url="/on_shelves" 
+		method="POST"
+              	contents="on_shelf%5Bshelf_id%5D=%%_shelf_id%%&amp;on_shelf%5Bbook_id%5D=%%_book_id%%"/>
+      </request>
+
+      <!-- comment on the book we just created-->
+      <!-- 
+           -->
+      <request subst="true">
+        <http 	url="/comments" 
+		method="POST"
+              	contents="comment%5Bauthor_id%5D=%%_user_id%%&amp;comment%5Bbook_id%5D=%%_book_id%%&amp;comment%5Bbody=comment_for_user_%%_first%%%%_last%%"/>
+      </request>
+
+      <!-- view feed before leaving -->
+      <!-- 
+           -->
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- remove the book from the shelf -->
+      <!-- 
+           -->
+      <request subst="true">
+        <http url="%%_root_url%%on_shelves/%%_on_shelf_id%%" method="DELETE">
+        </http>
+      </request>
+
+      <!-- delete the shelf -->
+      <!-- 
+           -->
+      <request subst="true">
+        <http url="%%_root_url%%shelves/%%_shelf_id%%" method="DELETE">
+        </http>
+      </request>
+
+      <!-- DELETE the user we just created -->
+      <!-- 
+           -->
+      <request subst="true">
+        <http url="%%_root_url%%users/%%_user_id%%" method="DELETE">
+        </http>
+      </request>
 
       <!-- logs all dynamic variables, very useful -->
-      <!-- COMMENT: Chang, this part is what will print the response, so you can see it when you run the tsung from ssh -->
       <setdynvars sourcetype="eval" code="fun( {Pid, DynVars} ) ->
           io:format([126, $p, 126, $n, 126, $n], [DynVars]),
           ok end.">
