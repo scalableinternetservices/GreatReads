@@ -3,7 +3,7 @@
 <p id="notice"><%= notice %></p>
 <div class="ui text container">
   <div class="ui link three cards">
-    <% @books.each do |book| %>
+    <% @books.recent(25).each do |book| %>
       <div class="ui card">
         <div class="image">
 
