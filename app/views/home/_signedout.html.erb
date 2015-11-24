@@ -1,28 +1,3 @@
-
-<div class="ui large top fixed menu" id="menu">
-  <div class="ui container">
-    <a class="toc item">
-      <i class="sidebar icon"></i>
-    </a>
-    <div class="item" style="padding: 0px;" id="title">
-      <%= link_to image_tag("title.png") %>
-    </div>
-    <div class="right menu">
-      <a href="<%= root_path %>" class="active item">Home</a>
-      <div class="item">
-        <button type="submit" class="ui button">
-          <%= link_to "Sign in", new_user_session_path, :method => :get %>
-        </button>
-      </div>
-      <div class="item">
-        <button type="submit" class="ui button">
-          <%= link_to "Sign up", new_user_registration_path %>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="ui vertical inverted sidebar menu">
   <a class="active item">Home</a>
   <a class="item">About</a>
@@ -32,16 +7,11 @@
   <div id="banner" class="ui vertical masthead center aligned segment">
 
     <div class="ui text container" style="padding-top: 50px;">
-        <h1 class="ui header" style="color: beige;">
-            <i class="fa fa-book"></i>
-        </h1>
-        <h2 style="color: beige;">GoodReads wasn't enough.</h2>
-
-        
-        
-      
+      <h1 class="ui header" style="color: beige;">
+        <i class="fa fa-book"></i>
+      </h1>
+      <h2 style="color: beige;">GoodReads wasn't enough.</h2>
     </div>
-
   </div>
 
 
@@ -109,18 +79,6 @@ $(document)
       });
 
     }
-    
-    // $('.masthead')
-    //   .visibility({
-    //     once: false,
-    //     onBottomPassed: function() {
-    //       $('.fixed.menu').transition('fade in');
-    //     },
-    //     onBottomPassedReverse: function() {
-    //       $('.fixed.menu').transition('fade out');
-    //     }
-    //   })
-    // ;
 
     $('.ui.sidebar')
       .sidebar('attach events', '.toc.item')
