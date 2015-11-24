@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="5a857c63.ngrok.com" port="80" type="tcp"></server>
+    <server host="61374620.ngrok.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -94,14 +94,18 @@
       </request>
 	
       <!-- follow a user-->
+      <!-- 
+           -->
       <request subst="true">
 	<dyn_variable name="following_id" re="[Ll]ocation: http://.*/(.*)\r"/>
         <http 	url="/followings" 
 		method="POST"
-              	contents="following%5bperson_id%5D=22&amp;following%5Bfollower_id=%%_user_id%%"/>
+              	contents="following%5bperson_id%5D=2&amp;following%5Bfollower_id=%%_user_id%%"/>
       </request>
 
       <!-- create a new book-->
+      <!-- 
+           -->
       <request subst="true">
 	<dyn_variable name="book_id" re="[Ll]ocation: http://.*/(.*)\r"/>
         <http 	url="/books" 
@@ -110,6 +114,8 @@
       </request>
 
       <!-- create a new shelf-->
+      <!-- 
+           -->
       <request subst="true">
 	<dyn_variable name="shelf_id" re="[Ll]ocation: http://.*/(.*)\r"/>
         <http 	url="/shelves" 
@@ -118,6 +124,8 @@
       </request>
 
       <!-- place the book we just created on the shelf we just created -->
+      <!-- 
+           -->
       <request subst="true">
 	<dyn_variable name="on_shelf_id" re="[Ll]ocation: http://.*/(.*)\r"/>
         <http 	url="/on_shelves" 
@@ -126,6 +134,8 @@
       </request>
 
       <!-- comment on the book we just created-->
+      <!-- 
+           -->
       <request subst="true">
         <http 	url="/comments" 
 		method="POST"
@@ -133,23 +143,31 @@
       </request>
 
       <!-- view feed before leaving -->
+      <!-- 
+           -->
       <request>
         <http url='/' version='1.1' method='GET'></http>
       </request>
 
       <!-- remove the book from the shelf -->
+      <!-- 
+           -->
       <request subst="true">
         <http url="%%_root_url%%on_shelves/%%_on_shelf_id%%" method="DELETE">
         </http>
       </request>
 
       <!-- delete the shelf -->
+      <!-- 
+           -->
       <request subst="true">
         <http url="%%_root_url%%shelves/%%_shelf_id%%" method="DELETE">
         </http>
       </request>
 
       <!-- DELETE the user we just created -->
+      <!-- 
+           -->
       <request subst="true">
         <http url="%%_root_url%%users/%%_user_id%%" method="DELETE">
         </http>
