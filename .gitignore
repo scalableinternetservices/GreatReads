@@ -7,3 +7,5 @@
 public/system/
 setup.sh
 GreatReads.pem
+*.pdf
+TSWLatexianTemp_*
