@@ -9,7 +9,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = Book.last(48)
     @book = Book.new
   end
 
