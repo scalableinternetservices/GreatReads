@@ -51,3 +51,5 @@ end
 gem 'paperclip'
 gem 'aws-sdk','< 2.0'
 gem 'fog'
+
+gem 'will_paginate'
