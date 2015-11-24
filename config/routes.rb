@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :followings
   resources :shelves
   resources :on_shelves
-  devise_for :users, controllers: {registrations: "registrations"}
+  devise_for :users
   resources :users
   resources :books
   get 'home/index'
