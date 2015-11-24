@@ -1,28 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-</p>
-
-<p>
   <strong>Title:</strong>
   <%= @book.title %>
 </p>
 
+<%= image_tag @book.avatar.url %>
+
 <p>
-  <strong>PDF:</strong>
-  <%= link_to "display using the full viewer", pdfjs.full_path(file: "#{@book.pdf}") %>
-  <%= pdfjs_viewer pdf_url: "#{@book.pdf}", style: :full %>
-  <br>
-  <object data="<%= @book.pdf %>" type="application/x-pdf" title="SamplePdf" width="500" height="720">
-      <a href="<%= @book.pdf %>">link to og file</a> 
-  </object>
+  <%= @book.story %>
 </p>
 
 <strong>Comments:</strong>
 <% @comments.each do |comment| %>
-    <br>
-    Comment: <%= comment.body %>
+<br>
+Comment: <%= comment.body %>
 <%end%>
 <br>
 <br>
@@ -31,14 +23,14 @@
 <br>
 <br>
 <%= form_for(@new_comment) do |f| %>
-    <div class="field">
-      <%= f.hidden_field :book_id, :value => @new_comment.book_id %>
-      <%= f.hidden_field :author_id, :value => current_user.id %>
-      <%= f.text_field :body %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+<div class="field">
+  <%= f.hidden_field :book_id, :value => @new_comment.book_id %>
+  <%= f.hidden_field :author_id, :value => current_user.id %>
+  <%= f.text_field :body %>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
 <% end %>
 <br>
 <br>

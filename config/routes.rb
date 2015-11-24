@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
 
-  mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
-
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

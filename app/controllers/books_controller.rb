@@ -1,9 +1,4 @@
-require 'rubygems'
-require 'open-uri'
-
-
 class BooksController < ApplicationController
-
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   # GET /books
@@ -20,13 +15,6 @@ class BooksController < ApplicationController
     @new_comment = Comment.new(
         book_id: params[:id],
     )
-    Rails.logger.debug "PATH = #{@book.pdf}"
-    open("#{@book.pdf}", "rb") do |io| 
-      reader = PDF::Reader.new(io)
-      reader.pages.each do |page|
-        Rails.logger.debug "log #{page.text}"
-      end
-    end
   end
 
   # GET /books/1/edit
@@ -81,6 +69,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :pdf)
+      params.require(:book).permit(:title, :story, :avatar)
     end
 end
