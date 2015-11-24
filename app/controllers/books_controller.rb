@@ -4,14 +4,14 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = Book.paginate(:page => params[:page], :per_page => 4)
     @book = Book.new
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
-    @comments = Comment.where(book_id: params[:id])
+    @comments = Comment.where(book_id: params[:id]).paginate(:page => params[:page], :per_page => 4)
     @new_comment = Comment.new(
         book_id: params[:id],
     )

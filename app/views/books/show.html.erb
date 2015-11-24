@@ -46,11 +46,13 @@
 
 <p>
 <strong>Comments:</strong>
-<% @comments.each do |comment| %>
 <br>
-Comment: <%= comment.body %>
+<% @comments.each do |comment| %>
+    Comment: <%= comment.body %>
+    <br>
 <%end%>
-
+<br>
+<%= will_paginate @comments %>
 </p>
 
 <strong>Add a comment</strong>
