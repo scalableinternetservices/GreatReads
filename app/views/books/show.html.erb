@@ -5,15 +5,16 @@
   <%= @book.title %>
 </p>
 
+<%= image_tag @book.avatar.url %>
+
 <p>
-  <strong>Avatar:</strong>
-  <%= image_tag @book.avatar.url %>
+  <%= @book.story %>
 </p>
 
 <strong>Comments:</strong>
 <% @comments.each do |comment| %>
-    <br>
-    Comment: <%= comment.body %>
+<br>
+Comment: <%= comment.body %>
 <%end%>
 <br>
 <br>
@@ -22,14 +23,14 @@
 <br>
 <br>
 <%= form_for(@new_comment) do |f| %>
-    <div class="field">
-      <%= f.hidden_field :book_id, :value => @new_comment.book_id %>
-      <%= f.hidden_field :author_id, :value => current_user.id %>
-      <%= f.text_field :body %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+<div class="field">
+  <%= f.hidden_field :book_id, :value => @new_comment.book_id %>
+  <%= f.hidden_field :author_id, :value => current_user.id %>
+  <%= f.text_field :body %>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
 <% end %>
 <br>
 <br>
