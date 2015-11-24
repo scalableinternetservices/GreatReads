@@ -20,4 +20,7 @@ class Book < ActiveRecord::Base
   # end
 
 
+  def self.random
+    Book.offset(rand(Book.count)).first
+  end
 end
