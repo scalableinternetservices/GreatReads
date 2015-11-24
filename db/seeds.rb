@@ -13,7 +13,7 @@ Comment.delete_all
 Shelf.delete_all
 OnShelf.delete_all
 
-RECORD_COUNT_FACTOR = 500
+RECORD_COUNT_FACTOR = 3000
 
 (1..RECORD_COUNT_FACTOR).each do |seed_id|
   user = User.new
