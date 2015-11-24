@@ -4,29 +4,31 @@
 <div class="ui text container">
   <div class="ui link three cards">
     <% @books.each do |book| %>
-      <div class="ui card">
-        <div class="image">
-          <img src="https://placehold.it/350x200">
-        </div>
-        <div class="content">
-          <div class="header"><%= book.title %></div>
-          <div class="meta">
-            <a>Genre</a>
-          </div>
-          <div class="description">
-            <%= link_to 'Show', book %> <%= link_to 'Edit', edit_book_path(book) %> <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
-          </div>
-        </div>
-        <div class="extra content">
-          <span class="right floated">
-            Etc.
-          </span>
-          <span>
-            <i class="comment icon"></i>
-            0 Comments
-          </span>
-        </div>
-      </div>
+        <% cache(book.cache_key) do %>
+            <div class="ui card">
+              <div class="image">
+                <img src="https://placehold.it/350x200">
+              </div>
+              <div class="content">
+                <div class="header"><%= book.title %></div>
+                <div class="meta">
+                  <a>Genre</a>
+                </div>
+                <div class="description">
+                  <%= link_to 'Show', book %> <%= link_to 'Edit', edit_book_path(book) %> <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
+                </div>
+              </div>
+              <div class="extra content">
+              <span class="right floated">
+                Etc.
+              </span>
+              <span>
+                <i class="comment icon"></i>
+                0 Comments
+              </span>
+              </div>
+            </div>
+        <% end %>
     <% end %>
   </div>
 </div>
