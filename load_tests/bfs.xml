@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="3b50e342.ngrok.com" port="80" type="tcp"></server>
+    <server host="5a857c63.ngrok.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -93,6 +93,14 @@
               contents="utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;user%5Bemail%5D=user%%_first%%%40%%_last%%.com&amp;user%5Bpassword%5D=password%%_first%%%%_last%%&amp;commit=Sign+up"/>
       </request>
 	
+      <!-- follow a user-->
+      <request subst="true">
+	<dyn_variable name="following_id" re="[Ll]ocation: http://.*/(.*)\r"/>
+        <http 	url="/followings" 
+		method="POST"
+              	contents="following%5bperson_id%5D=22&amp;following%5Bfollower_id=%%_user_id%%"/>
+      </request>
+
       <!-- create a new book-->
       <request subst="true">
 	<dyn_variable name="book_id" re="[Ll]ocation: http://.*/(.*)\r"/>
