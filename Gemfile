@@ -52,6 +52,6 @@ gem 'paperclip'
 gem 'aws-sdk','< 2.0'
 gem 'fog'
 
-gem 'pdf-reader'
-gem 'pdfjs_viewer-rails'
+# gem 'pdf-reader'
+# gem 'pdfjs_viewer-rails'
 
