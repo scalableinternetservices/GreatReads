@@ -9,15 +9,14 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="61374620.ngrok.com" port="80" type="tcp"></server>
+    <server host="ec2-52-34-175-188.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
   <load>
-    <arrivalphase phase="1" duration="10" unit="second">
+    <arrivalphase phase="1" duration="30" unit="second">
       <users arrivalrate="1" unit="second"></users>
     </arrivalphase>
-<!--
     <arrivalphase phase="2" duration="30" unit="second">
       <users arrivalrate="2" unit="second"></users>
     </arrivalphase>
@@ -45,7 +44,6 @@
    <arrivalphase phase="10" duration="30" unit="second">
      <users arrivalrate="512" unit="second"></users>
    </arrivalphase>
--->
   </load>
 
   <options>
@@ -93,6 +91,9 @@
               contents="utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;user%5Bemail%5D=user%%_first%%%40%%_last%%.com&amp;user%5Bpassword%5D=password%%_first%%%%_last%%&amp;commit=Sign+up"/>
       </request>
 	
+      <!-- wait for up to 2 seconds -->
+      <thinktime value="2" random="true"></thinktime>
+
       <!-- follow a user-->
       <!-- 
            -->
@@ -102,6 +103,9 @@
 		method="POST"
               	contents="following%5bperson_id%5D=2&amp;following%5Bfollower_id=%%_user_id%%"/>
       </request>
+
+      <!-- wait for up to 2 seconds -->
+      <thinktime value="2" random="true"></thinktime>
 
       <!-- create a new book-->
       <!-- 
@@ -113,6 +117,9 @@
               	contents="book%5btitle%5D=book_for_user_%%_first%%%%_last%%"/>
       </request>
 
+      <!-- wait for up to 2 seconds -->
+      <thinktime value="2" random="true"></thinktime>
+
       <!-- create a new shelf-->
       <!-- 
            -->
@@ -122,6 +129,9 @@
 		method="POST"
               	contents="shelf%5Bshelf_name%5D=shelf_for_user_%%_first%%%%_last%%&amp;shelf%5Bshelf_owner%5D=%%_user_id%%"/>
       </request>
+
+      <!-- wait for up to 2 seconds -->
+      <thinktime value="2" random="true"></thinktime>
 
       <!-- place the book we just created on the shelf we just created -->
       <!-- 
@@ -133,6 +143,9 @@
               	contents="on_shelf%5Bshelf_id%5D=%%_shelf_id%%&amp;on_shelf%5Bbook_id%5D=%%_book_id%%"/>
       </request>
 
+      <!-- wait for up to 2 seconds -->
+      <thinktime value="2" random="true"></thinktime>
+
       <!-- comment on the book we just created-->
       <!-- 
            -->
@@ -142,12 +155,18 @@
               	contents="comment%5Bauthor_id%5D=%%_user_id%%&amp;comment%5Bbook_id%5D=%%_book_id%%&amp;comment%5Bbody=comment_for_user_%%_first%%%%_last%%"/>
       </request>
 
+      <!-- wait for up to 2 seconds -->
+      <thinktime value="2" random="true"></thinktime>
+
       <!-- view feed before leaving -->
       <!-- 
            -->
       <request>
         <http url='/' version='1.1' method='GET'></http>
       </request>
+
+      <!-- wait for up to 2 seconds -->
+      <thinktime value="2" random="true"></thinktime>
 
       <!-- remove the book from the shelf -->
       <!-- 
@@ -157,6 +176,9 @@
         </http>
       </request>
 
+      <!-- wait for up to 2 seconds -->
+      <thinktime value="2" random="true"></thinktime>
+
       <!-- delete the shelf -->
       <!-- 
            -->
@@ -164,6 +186,9 @@
         <http url="%%_root_url%%shelves/%%_shelf_id%%" method="DELETE">
         </http>
       </request>
+
+      <!-- wait for up to 2 seconds -->
+      <thinktime value="2" random="true"></thinktime>
 
       <!-- DELETE the user we just created -->
       <!-- 
