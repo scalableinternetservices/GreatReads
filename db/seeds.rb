@@ -16,6 +16,9 @@ OnShelf.delete_all
 RECORD_COUNT_FACTOR = 3000
 
 (1..RECORD_COUNT_FACTOR).each do |seed_id|
+
+  puts "Working on user #{seed_id}"
+
   user = User.new
   user.email = "seeduser#{seed_id}@seeduser.com"
   user.password = "password"
@@ -31,6 +34,7 @@ RECORD_COUNT_FACTOR = 3000
   book.save!
 end
 
+puts "done adding users. following & commenting"
 
 User.all.each do |user|
   (RECORD_COUNT_FACTOR / 100.0).round.times do
@@ -45,6 +49,8 @@ User.all.each do |user|
   comment.save!
 end
 
+puts "shelving books"
+
 Shelf.all.each do |shelf|
   (RECORD_COUNT_FACTOR / 100.0 / 5.0).round.times do
     on_shelf = OnShelf.new
@@ -53,3 +59,6 @@ Shelf.all.each do |shelf|
     on_shelf.save!
   end
 end
+
+puts "Done!"
+
