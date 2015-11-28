@@ -23,6 +23,9 @@ module GreatReads
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    # let's cache things
+    config.action_controller.perform_caching = true
+
     #paperclip
     Paperclip.options[:command_path] = "/usr/local/bin/"
   end
