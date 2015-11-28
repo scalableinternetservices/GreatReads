@@ -79,6 +79,9 @@
       <setdynvars sourcetype="random_number" start="1000" end="9999999">
         <var name="last" />
       </setdynvars>
+      <setdynvars sourcetype="random_number" start="1" end="3000">
+        <var name="followee" />
+      </setdynvars>
 
       <!-- sign up a new user (currently hard-coding in the username password) -->
       <request subst="true">
@@ -101,7 +104,7 @@
 	<dyn_variable name="following_id" re="[Ll]ocation: http://.*/(.*)\r"/>
         <http 	url="/followings" 
 		method="POST"
-              	contents="following%5bperson_id%5D=2&amp;following%5Bfollower_id=%%_user_id%%"/>
+              	contents="following%5bperson_id%5D=%%_followee%%&amp;following%5Bfollower_id=%%_user_id%%"/>
       </request>
 
       <!-- wait for up to 2 seconds -->
