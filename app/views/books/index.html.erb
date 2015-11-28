@@ -4,6 +4,7 @@
 <div class="ui text container">
   <div class="ui link three cards">
     <% @books.each do |book| %>
+        <% cache(book.cache_key) do %>
     <div class="ui card">
       <div class="image">
         <%= image_tag @book.avatar.url %>
@@ -29,6 +30,7 @@
         </span>
       </div>
     </div>
+        <% end %>
     <% end %>
   </div>
 </div>
