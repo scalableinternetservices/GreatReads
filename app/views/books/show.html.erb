@@ -11,6 +11,7 @@
 	<%= @book.story %>
 </p>
 
+
 <div class="ui button" id="popup">Show flowing popup</div>
 <div class="ui flowing popup top left transition hidden">
 	<div class="ui three column divided center aligned grid">
@@ -32,16 +33,27 @@
 	</div>
 </div>
 
+
+<p>
+<strong>Your shelves:</strong><br>
+<% @shelves.each do |shelf| %>
+  <%= shelf.shelf_name %>
+   
+  <%= link_to "Add  to shelf", on_shelves_path(:book_id => @book.id, :shelf_id => shelf.id), :method => :post %>
+  <br>
+<% end %>
+</p>
+
+<p>
 <strong>Comments:</strong>
 <% @comments.each do |comment| %>
 <br>
 Comment: <%= comment.body %>
 <%end%>
-<br>
-<br>
 
-<strong>Comment on this Book</strong>
-<br>
+</p>
+
+<strong>Add a comment</strong>
 <br>
 <%= form_for(@new_comment) do |f| %>
 <div class="field">
