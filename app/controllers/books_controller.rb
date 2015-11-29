@@ -11,15 +11,28 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    @followings = Following.where(follower_id: current_user.id)
+
+    @book = Book.find(params[:id])
+
     @comments = Comment.where(book_id: params[:id])
-    @new_comment = Comment.new(
-        book_id: params[:id],
+    # @new_comment = Comment.new(book_id: params[:id])
+    @new_comment = @book.comments.build( 
+      book_id: @book.id
     )
+
+
+    @quotes = Quote.where(book_id: params[:id])
+    @new_quote = current_user.quotes.build(
+      book_id: params[:id]
+    )
+
     @shelves = Shelf.where(shelf_owner: current_user.id)
     @new_onshelf = OnShelf.new(
         book_id: params[:id],
     )
     # @shelves = Shelf.all 
+
   end
 
   # GET /books/1/edit
@@ -76,4 +89,4 @@ class BooksController < ApplicationController
     def book_params
       params.require(:book).permit(:title, :story, :avatar)
     end
-end
+  end
