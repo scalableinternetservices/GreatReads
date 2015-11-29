@@ -20,12 +20,12 @@
         </div>
       </div>
       <div class="extra content">
-        <span class="right floated">
+        <!-- <span class="right floated">
           Etc.
-        </span>
+        </span> -->
         <span>
           <i class="comment icon"></i>
-          0 Comments
+          <%= Comment.where(book_id: book.id).count %> Comments
         </span>
       </div>
     </div>

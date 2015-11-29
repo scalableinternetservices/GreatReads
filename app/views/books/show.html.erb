@@ -11,31 +11,10 @@
 	<%= @book.story %>
 </p>
 
-<div class="ui button" id="popup">Show flowing popup</div>
-<div class="ui flowing popup top left transition hidden">
-	<div class="ui three column divided center aligned grid">
-		<div class="column">
-			<h4 class="ui header">Basic Plan</h4>
-			<p><b>2</b> projects, $10 a month</p>
-			<div class="ui button">Choose</div>
-		</div>
-		<div class="column">
-			<h4 class="ui header">Business Plan</h4>
-			<p><b>5</b> projects, $20 a month</p>
-			<div class="ui button">Choose</div>
-		</div>
-		<div class="column">
-			<h4 class="ui header">Premium Plan</h4>
-			<p><b>8</b> projects, $25 a month</p>
-			<div class="ui button">Choose</div>
-		</div>
-	</div>
-</div>
-
 <strong>Comments:</strong>
 <% @comments.each do |comment| %>
 <br>
-Comment: <%= comment.body %>
+<%= User.find(comment.author_id).email %> : <%= comment.body %>
 <%end%>
 <br>
 <br>
@@ -56,41 +35,50 @@ Comment: <%= comment.body %>
 <br>
 <br>
 
+<div id="quotes" style="position: fixed; right: 15px; bottom: 15px; width: 200px; height: 100px; background: white;">
+	<form action="">
+		<input type="text" disabled="disabled" id="current_quote">
+	</form>
+	
+</div>
+
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.5/components/modal.min.js"></script>
 <script>
-	if(!window.Kolich){
-		Kolich = {};
+	if(!window.Medium){
+		Medium = {};
 	}
 
-	Kolich.Selector = {};
-	Kolich.Selector.getSelected = function(){
+	Medium.Selector = {};
+	Medium.Selector.getSelected = function(){
 		var t = '';
 		if(window.getSelection){
 			t = window.getSelection();
-		}else if(document.getSelection){
-			t = document.getSelection();
-		}else if(document.selection){
-			t = document.selection.createRange().text;
 		}
+		// }else if(document.getSelection){
+		// 	t = document.getSelection();
+		// }else if(document.selection){
+		// 	t = document.selection.createRange().text;
+		// }
 		return t;
 	}
+	// document.getElementById('#story').onmouseover = function() { 
+		Medium.Selector.mouseup = function(){
+			var st = Medium.Selector.getSelected();
 
-	Kolich.Selector.mouseup = function(){
-		var st = Kolich.Selector.getSelected();
-		// $('#story')
-		//   .popup({
-		//     popup : $('.popup'),
-		//     hoverable: true
-		//   })
-		// ;
-		if(st!=''){
-			alert("You selected:\n"+st);
+			if(st!=''){
+				console.log('yes');
+				$('input[type=text]#current_quote').val(st);
+			}
 		}
-	}
+	// }
+	
 
 	$(document).ready(function(){
-		$(document).bind("mouseup", Kolich.Selector.mouseup);
+		$('#current_quote').value = "asdfasdf";
+		$(document).bind("mouseup", Medium.Selector.mouseup);
 	});
 </script>
