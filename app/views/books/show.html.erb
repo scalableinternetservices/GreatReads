@@ -42,6 +42,7 @@
   <%= link_to "Add  to shelf", on_shelves_path(:book_id => @book.id, :shelf_id => shelf.id), :method => :post %>
   <br>
 <% end %>
+<%= will_paginate @shelves %>
 </p>
 
 <p>
