@@ -20,7 +20,13 @@ class BooksController < ApplicationController
     @new_quote = current_user.quotes.build(
       book_id: params[:id]
     )
-    
+
+    @shelves = Shelf.where(shelf_owner: current_user.id)
+    @new_onshelf = OnShelf.new(
+        book_id: params[:id],
+    )
+    # @shelves = Shelf.all 
+
   end
 
   # GET /books/1/edit

@@ -8,3 +8,4 @@ public/system/
 setup.sh
 /app/assets/images/logo.ai
 GreatReads.pem
+*.pdf

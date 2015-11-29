@@ -24,17 +24,26 @@
 <br>
 <br>
 
+<p>
+	<strong>Your shelves:</strong><br>
+	<% @shelves.each do |shelf| %>
+	<%= shelf.shelf_name %>
 
-<strong>Comments:</strong>
-<% @comments.each do |comment| %>
-<br>
-<%= User.find(comment.author_id).email %> : <%= comment.body %>
-<%end%>
-<br>
-<br>
+	<%= link_to "Add  to shelf", on_shelves_path(:book_id => @book.id, :shelf_id => shelf.id), :method => :post %>
+	<br>
+	<% end %>
+</p>
 
-<strong>Comment on this Book</strong>
-<br>
+<p>
+	<strong>Comments:</strong>
+	<% @comments.each do |comment| %>
+	<br>
+	<%= User.find(comment.author_id).email %> : <%= comment.body %>
+	<%end%>
+
+</p>
+
+<strong>Add a comment</strong>
 <br>
 <%= form_for(@new_comment) do |f| %>
 <div class="field">
@@ -80,24 +89,16 @@
 		if(window.getSelection){
 			t = window.getSelection();
 		}
-		// }else if(document.getSelection){
-		// 	t = document.getSelection();
-		// }else if(document.selection){
-		// 	t = document.selection.createRange().text;
-		// }
 		return t;
 	}
-	// document.getElementById('#story').onmouseover = function() { 
-		Medium.Selector.mouseup = function(){
-			var st = Medium.Selector.getSelected();
+	Medium.Selector.mouseup = function(){
+		var st = Medium.Selector.getSelected();
 
-			if(st!=''){
-				console.log('yes');
-				// $('input[type=text]#current_quote').val(st);
-				$('#quote_body').val(st);
-			}
+		if(st!=''){
+			$('#quote_body').val(st);
 		}
-	// }
+	}
+
 	
 
 	$(document).ready(function(){

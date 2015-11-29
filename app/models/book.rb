@@ -4,4 +4,8 @@ class Book < ActiveRecord::Base
 
 	include PublicActivity::Model
 	tracked owner: Proc.new{ |controller, model| controller.current_user }
+
+  def self.random
+    Book.offset(rand(Book.count)).first
+  end
 end
