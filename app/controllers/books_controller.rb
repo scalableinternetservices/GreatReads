@@ -14,13 +14,13 @@ class BooksController < ApplicationController
     @followings = Following.where(follower_id: current_user.id)
 
     @comments = Comment.where(book_id: params[:id])
-    @new_comment = Comment.new(
-      book_id: params[:id]
-    )
+    @new_comment = Comment.new(book_id: params[:id])
+
     @quotes = Quote.where(book_id: params[:id])
-    @new_quote = Quote.new(
+    @new_quote = current_user.quotes.build(
       book_id: params[:id]
     )
+    
   end
 
   # GET /books/1/edit

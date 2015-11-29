@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def show
       @user = User.find(params[:id])
       @shelves = Shelf.where(shelf_owner: params[:id])
+      # @quotes = Quote.where(author_id: params[:id])
   end
 
   # GET /users/new

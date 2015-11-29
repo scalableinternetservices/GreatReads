@@ -69,6 +69,6 @@ class QuotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quote_params
-      params.require(:quote).permit(:body, :book_id, :author_id)
+      params.require(:quote).permit(:user_id, :book_id, :body)
     end
 end

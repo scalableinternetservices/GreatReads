@@ -11,18 +11,15 @@
 
       </div>
       <div class="content">
-        <div class="header"><%= book.title %></div>
+        <div class="header"><%=link_to book.title, book %> </div>
         <div class="meta">
           <a>Genre</a>
         </div>
-        <div class="description">
-          <%= link_to 'Show', book %> <%= link_to 'Edit', edit_book_path(book) %> <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </div>
+        <!-- <div class="description">
+          < %= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div> -->
       </div>
       <div class="extra content">
-        <!-- <span class="right floated">
-          Etc.
-        </span> -->
         <span>
           <i class="comment icon"></i>
           <%= Comment.where(book_id: book.id).count %> Comments

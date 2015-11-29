@@ -1,9 +1,10 @@
+<%= render :partial => "layouts/navbar", :locals => { :active => "books" } %>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-	<strong>Title:</strong>
-	<%= @book.title %>
-</p>
+<h2><%= @book.title %></h2>
+
+
 
 <%= image_tag @book.avatar.url %>
 
@@ -11,18 +12,18 @@
 	<%= @book.story %>
 </p>
 
+<strong>My Quotes</strong>
+<% current_user.quotes.each do |quote| %>
+<br>
+<%= quote.body %>
+<% end %>
+<br>
+<br>
+
 <strong>Quotes</strong>
-<% @followings.each do |user| %>
-<br>
-	<% @quotes.each do |quote| %>
-		<% if quote.author_id == user.id %> 
-			<%= quote.author_id %> : <%= quote.body %>
-			<br>
-		<% end %>
-	<% end %>
-<% end%>
 <br>
 <br>
+
 
 <strong>Comments:</strong>
 <% @comments.each do |comment| %>
@@ -48,15 +49,12 @@
 <br>
 <br>
 
-<div id="quotes" style="position: fixed; right: 15px; bottom: 15px; width: 200px; height: 100px; background: white;">
-	<!-- <form action="">
-		<input type="text" disabled="disabled" id="current_quote">
-	</form> -->
+<div id="quotes" style="position: fixed; right: 15px; bottom: 15px; width: 200px; height: 100px; background: white;">	
 	<%= form_for (@new_quote) do |f| %>
 	<div class="field">
 		<%= f.hidden_field :book_id, :value => @new_comment.book_id %>
-		<%= f.hidden_field :author_id, :value => current_user.id %>
-		<%= f.text_area :body %>
+		<%= f.hidden_field :user_id, :value => current_user.id %>
+		<%= f.text_field :body %>
 	</div>
 	<div class="actions">
 		<%= f.submit %>

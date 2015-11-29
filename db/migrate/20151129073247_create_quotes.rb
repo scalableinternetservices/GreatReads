@@ -1,9 +1,9 @@
 class CreateQuotes < ActiveRecord::Migration
   def change
     create_table :quotes do |t|
-      t.string :body
+      t.integer :user_id
       t.integer :book_id
-      t.integer :author_id
+      t.string :body
 
       t.timestamps null: false
     end
