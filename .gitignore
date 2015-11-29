@@ -9,3 +9,4 @@ setup.sh
 /app/assets/images/logo.ai
 GreatReads.pem
 report.pdf
+*.pdf

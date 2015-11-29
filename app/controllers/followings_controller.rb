@@ -25,10 +25,13 @@ class FollowingsController < ApplicationController
   # POST /followings.json
   def create
     person_id = params[:person_id]
+    if person_id.nil?
+      person_id = params[:following][:person_id]
+    end
     @following = current_user.following.build(:person_id => person_id)
     if @following.save
-      flash[:notice] = "Followed %s" % (User.find_by id: person_id).email
-      redirect_to root_url
+      flash[:notice] = "Followed %s" % User.find(person_id).email
+      redirect_to users_url
     else
       flash[:notice] = "Failed to follow user. Please try again."
       redirect_to root_url

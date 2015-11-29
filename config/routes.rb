@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+  resources :quotes
   resources :comments
   resources :followings
   resources :shelves
   resources :on_shelves
-  devise_for :users
+  devise_for :users, controllers: {registrations: "registrations"}
   resources :users
   resources :books
   get 'home/index'
