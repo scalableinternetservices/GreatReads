@@ -37,6 +37,9 @@ end
 puts "done adding users. following & commenting"
 
 User.all.each do |user|
+
+  puts "doing commenting and following for user #{user.id}"
+
   (RECORD_COUNT_FACTOR / 100.0).round.times do
     user.following.build(:person_id => User.random.id).save
   end
@@ -52,6 +55,9 @@ end
 puts "shelving books"
 
 Shelf.all.each do |shelf|
+
+  puts "placing books on shelf #{shelf.id}"
+
   (RECORD_COUNT_FACTOR / 100.0 / 5.0).round.times do
     on_shelf = OnShelf.new
     on_shelf.shelf_id = shelf.id
