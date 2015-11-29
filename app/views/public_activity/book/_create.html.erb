@@ -1,0 +1,5 @@
+<li>
+  <%= a.created_at.strftime('%H:%M %B %-d %Y') %> 
+  <strong><%= activity.owner ? activity.owner.email : 'Guest' %></strong> 
+  added the book, <%= a.trackable.title %>.
+</li>

@@ -2,6 +2,10 @@
 
 <% if current_user %>
  <%= render 'signedin' %>
+ <ul>
+	<%= @activities.inspect %>
+	<%= render_activities @activities %>
+</ul>
 <% else %>
  <%= render 'signedout' %>
 <% end %>
