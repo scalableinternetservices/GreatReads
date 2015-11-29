@@ -1,0 +1,5 @@
+<li>
+  <%= a.created_at.strftime('%H:%M %B %-d %Y') %> 
+  <strong><%= activity.owner ? activity.owner.email : 'Guest' %></strong> 
+  saved a quote from the book <strong><%= Book.find(a.trackable.book_id).title %></strong>.
+</li>
