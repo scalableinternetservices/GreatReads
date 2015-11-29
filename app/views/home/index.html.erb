@@ -1,11 +1,10 @@
 <%= render :partial => "layouts/navbar", :locals => { :active => "home" } %>
 
 <% if current_user %>
- <%= render 'signedin' %>
- <ul>
-	<%= @activities.inspect %>
+<%= render 'signedin' %>
+<ul>
 	<%= render_activities @activities %>
 </ul>
 <% else %>
- <%= render 'signedout' %>
+<%= render 'signedout' %>
 <% end %>
