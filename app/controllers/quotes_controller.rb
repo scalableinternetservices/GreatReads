@@ -25,10 +25,11 @@ class QuotesController < ApplicationController
   # POST /quotes.json
   def create
     @quote = Quote.new(quote_params)
+    @book = Book.find_by(id: @quote.book_id)
 
     respond_to do |format|
       if @quote.save
-        format.html { redirect_to @quote, notice: 'Quote was successfully created.' }
+        format.html { redirect_to @book, notice: 'Quote was successfully created.' }
         format.json { render :show, status: :created, location: @quote }
       else
         format.html { render :new }
