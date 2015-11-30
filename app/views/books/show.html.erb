@@ -1,62 +1,66 @@
 <%= render :partial => "layouts/navbar", :locals => { :active => "books" } %>
 
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
-<h2><%= @book.title %></h2>
+<div class="ui text container">
+	
+	<h2><%= link_to 'Back', books_path %> | <%= @book.title %></h2>
 
+	<%= image_tag @book.avatar.url %>
 
+	<p id="story">
+		<%= @book.story %>
+	</p>
 
-<%= image_tag @book.avatar.url %>
-
-<p id="story">
-	<%= @book.story %>
-</p>
-
-<strong>My Quotes</strong>
-<% current_user.quotes.each do |quote| %>
-<br>
-<%= quote.body %>
-<% end %>
-<br>
-<br>
-
-<strong>Quotes</strong>
-<br>
-<br>
-
-<p>
-	<strong>Your shelves:</strong><br>
-	<% @shelves.each do |shelf| %>
-	<%= shelf.shelf_name %>
-
-	<%= link_to "Add  to shelf", on_shelves_path(:book_id => @book.id, :shelf_id => shelf.id), :method => :post %>
+	<strong>My Quotes</strong>
+	<% current_user.quotes.each do |quote| %>
 	<br>
+	<%= quote.body %>
 	<% end %>
-</p>
-
-<p>
-	<strong>Comments:</strong>
-	<% @comments.each do |comment| %>
 	<br>
-	<%= User.find(comment.author_id).email %> : <%= comment.body %>
-	<%end%>
+	<br>
 
-</p>
+	<strong>Quotes</strong>
+	<br>
+	<br>
 
-<strong>Add a comment</strong>
-<br>
-<%= form_for(@new_comment) do |f| %>
-<div class="field">
-	<%= f.hidden_field :book_id, :value => @new_comment.book_id %>
-	<%= f.hidden_field :author_id, :value => current_user.id %>
-	<%= f.text_field :body %>
+	<p>
+		<strong>Your shelves:</strong><br>
+		<% @shelves.each do |shelf| %>
+		<%= shelf.shelf_name %>
+
+		<%= link_to "Add  to shelf", on_shelves_path(:book_id => @book.id, :shelf_id => shelf.id), :method => :post %>
+		<br>
+		<% end %>
+	</p>
+
+	<p>
+		<strong>Comments:</strong>
+		<% @comments.each do |comment| %>
+		<br>
+		<%= User.find(comment.author_id).email %> : <%= comment.body %>
+		<%end%>
+
+	</p>
+
+	<strong>Add a comment</strong>
+	<br>
+	<%= form_for(@new_comment) do |f| %>
+	<div class="field">
+		<%= f.hidden_field :book_id, :value => @new_comment.book_id %>
+		<%= f.hidden_field :author_id, :value => current_user.id %>
+		<%= f.text_field :body %>
+	</div>
+	<div class="actions">
+		<%= f.submit %>
+	</div>
+	<% end %>
+	<br>
+	<br>
+
 </div>
-<div class="actions">
-	<%= f.submit %>
-</div>
-<% end %>
-<br>
-<br>
+
+
 
 <div id="quotes" style="position: fixed; right: 15px; bottom: 15px; width: 200px; height: 100px; background: white;">	
 	<%= form_for (@new_quote) do |f| %>
@@ -71,10 +75,6 @@
 	<% end %>
 	
 </div>
-
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.5/components/modal.min.js"></script>
