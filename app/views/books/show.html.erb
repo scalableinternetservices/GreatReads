@@ -3,58 +3,65 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
 <div class="ui text container">
-	
 	<h2><%= link_to 'Back', books_path %> | <%= @book.title %></h2>
 
 	<%= image_tag @book.avatar.url %>
 
-	<p id="story">
+	<h3 id="story" style="font-weight: normal;">
 		<%= @book.story %>
-	</p>
+	</h3>
 
-	<strong>My Quotes</strong>
+	<h3 class="ui dividing header">My Quotes</h3>
 	<% current_user.quotes.each do |quote| %>
-	<br>
 	<%= quote.body %>
+	<br>
 	<% end %>
-	<br>
-	<br>
 
-	<strong>Quotes</strong>
+	<h3 class="ui dividing header">My Shelves</h3>
+	<% @shelves.each do |shelf| %>
+	<%= shelf.shelf_name %>
+
+	<%= link_to "Add  to shelf", on_shelves_path(:book_id => @book.id, :shelf_id => shelf.id), :method => :post %>
 	<br>
-	<br>
+	<% end %>
 
-	<p>
-		<strong>Your shelves:</strong><br>
-		<% @shelves.each do |shelf| %>
-		<%= shelf.shelf_name %>
+	<h3 class="ui dividing header">Other People's Quotes</h3>
 
-		<%= link_to "Add  to shelf", on_shelves_path(:book_id => @book.id, :shelf_id => shelf.id), :method => :post %>
-		<br>
-		<% end %>
-	</p>
+	
 
-	<p>
-		<strong>Comments:</strong>
+	<div class="ui comments">
+		<h3 class="ui dividing header">Comments</h3>
 		<% @comments.each do |comment| %>
-		<br>
-		<%= User.find(comment.author_id).email %> : <%= comment.body %>
+		<div class="comment">
+			<a class="avatar">
+				<img src="/images/avatar/small/matt.jpg">
+			</a>
+			<div class="content">
+				<a class="author"><%= User.find(comment.author_id).email %></a>
+				<div class="metadata">
+					<span class="date"><%= comment.updated_at %></span>
+				</div>
+				<div class="text">
+					<%= comment.body %>
+				</div>
+			</div>
+		</div>
 		<%end%>
 
-	</p>
 
-	<strong>Add a comment</strong>
-	<br>
-	<%= form_for(@new_comment) do |f| %>
-	<div class="field">
-		<%= f.hidden_field :book_id, :value => @new_comment.book_id %>
-		<%= f.hidden_field :author_id, :value => current_user.id %>
-		<%= f.text_field :body %>
+		<%= form_for(@new_comment, :html => {:class => "ui reply form"}) do |f| %>
+		<div class="field">
+			<%= f.hidden_field :book_id, :value => @new_comment.book_id %>
+			<%= f.hidden_field :author_id, :value => current_user.id %>
+			<%= f.text_area :body %>
+		</div>
+
+		<%= f.submit "Add Comment", class: "ui fluid large submit button" %>
+
+		<% end %>
+
 	</div>
-	<div class="actions">
-		<%= f.submit %>
-	</div>
-	<% end %>
+
 	<br>
 	<br>
 
@@ -62,15 +69,16 @@
 
 
 
-<div id="quotes" style="position: fixed; right: 15px; bottom: 15px; width: 200px; height: 100px; background: white;">	
-	<%= form_for (@new_quote) do |f| %>
+
+<div id="quotes" style="position: fixed; right: 15px; bottom: 15px; width: 200px; height: 120px; padding: 15px; background: white;">	
+	<%= form_for @new_quote, :html => {:class => "ui form"} do |f| %>
 	<div class="field">
 		<%= f.hidden_field :book_id, :value => @new_comment.book_id %>
 		<%= f.hidden_field :user_id, :value => current_user.id %>
 		<%= f.text_field :body %>
 	</div>
 	<div class="actions">
-		<%= f.submit %>
+		<%= f.submit "Add Quote", class: "ui submit button" %>
 	</div>
 	<% end %>
 	

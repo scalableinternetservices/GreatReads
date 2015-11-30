@@ -1,5 +1,19 @@
-<li>
-  <%= a.created_at.strftime('%H:%M %B %-d %Y') %> 
-  <strong><%= activity.owner ? activity.owner.email : 'Guest' %></strong> 
-  commented on the book <strong><%= Book.find(a.trackable.book_id).title %></strong>.
-</li>
+
+<div class="event">
+	<div class="label">
+		<img src="/images/avatar/small/elliot.jpg">
+	</div>
+	<div class="content">
+		<div class="summary">
+			<a class="user">
+				<%= activity.owner ? activity.owner.email : 'Guest' %>
+			</a> commented on the book, <em><%= Book.find(a.trackable.book_id).title %></em>.
+			<div class="date">
+				<%= a.created_at.strftime('%H:%M %B %-d %Y') %> 
+			</div>
+			<div class="extra text">
+				<%= a.trackable.body %>
+			</div>
+		</div>
+	</div>
+</div>
