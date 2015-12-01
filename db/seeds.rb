@@ -20,6 +20,8 @@ RECORD_COUNT_FACTOR = 3000
   puts "Working on user #{seed_id}"
 
   user = User.new
+  user.first = "first#{seed_id}"
+  user.last = "last#{seed_id}"
   user.email = "seeduser#{seed_id}@seeduser.com"
   user.password = "password"
   user.save!
