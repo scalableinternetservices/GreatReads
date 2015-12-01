@@ -5,8 +5,8 @@
   <div class="ui link three cards">
     <% @books.each do |book| %>
     <div class="ui card">
-      <div class="image">
-        <%= image_tag @book.avatar.url %>
+      <div class="image" style="height: 150px; background-image: url('<%= book.avatar.url %>'); background-size: 100%;">
+
 
 
       </div>

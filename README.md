@@ -1,4 +1,5 @@
-# GreatReads
+# GreatReads 
+<img src="https://travis-ci.org/scalableinternetservices/GreatReads.svg">
 
 ## Project Description 
 GreatReads is a Great...er Goodreads. 
