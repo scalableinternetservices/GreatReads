@@ -1,4 +1,6 @@
 <h3>Feed</h3>
 <% current_user.get_feed.each do |comment| %>
-  <%= comment.body %><br>
+    <% cache(comment.cache_key) do %>
+        <%= comment.body %><br>
+    <% end %>
 <% end %>

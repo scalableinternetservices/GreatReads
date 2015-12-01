@@ -37,18 +37,22 @@
 <p>
 <strong>Your shelves:</strong><br>
 <% @shelves.each do |shelf| %>
-  <%= shelf.shelf_name %>
+  <% cache(shelf.cache_key) do %>
+    <%= shelf.shelf_name %>
    
-  <%= link_to "Add  to shelf", on_shelves_path(:book_id => @book.id, :shelf_id => shelf.id), :method => :post %>
-  <br>
+    <%= link_to "Add  to shelf", on_shelves_path(:book_id => @book.id, :shelf_id => shelf.id), :method => :post %>
+    <br>
+  <% end %>
 <% end %>
 </p>
 
 <p>
 <strong>Comments:</strong>
 <% @comments.each do |comment| %>
-<br>
-Comment: <%= comment.body %>
+  <% cache(comment.cache_key) do %>
+    <br>
+    Comment: <%= comment.body %>
+  <%end%>
 <%end%>
 
 </p>
