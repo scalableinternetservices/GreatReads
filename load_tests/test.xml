@@ -58,7 +58,7 @@
   <sessions>
     <session name="http-example" probability="100" type="ts_http">
 
-      <!-- start out at the dashboard. -->
+      <!-- view the feed -->
       <request>
         <http url='/' version='1.1' method='GET'></http>
       </request>
@@ -98,8 +98,6 @@
       <thinktime value="2" random="true"></thinktime>
 
       <!-- follow a user-->
-      <!-- 
-           -->
       <request subst="true">
 	<dyn_variable name="following_id" re="[Ll]ocation: http://.*/(.*)\r"/>
         <http 	url="/followings" 
@@ -111,8 +109,6 @@
       <thinktime value="2" random="true"></thinktime>
 
       <!-- create a new book-->
-      <!-- 
-           -->
       <request subst="true">
 	<dyn_variable name="book_id" re="[Ll]ocation: http://.*/(.*)\r"/>
         <http 	url="/books" 
@@ -120,12 +116,15 @@
               	contents="book%5btitle%5D=book_for_user_%%_first%%%%_last%%"/>
       </request>
 
+      <!-- view the list of books -->
+      <request>
+        <http url='/books' version='1.1' method='GET'></http>
+      </request>
+
       <!-- wait for up to 2 seconds -->
       <thinktime value="2" random="true"></thinktime>
 
       <!-- create a new shelf-->
-      <!-- 
-           -->
       <request subst="true">
 	<dyn_variable name="shelf_id" re="[Ll]ocation: http://.*/(.*)\r"/>
         <http 	url="/shelves" 
@@ -137,8 +136,6 @@
       <thinktime value="2" random="true"></thinktime>
 
       <!-- place the book we just created on the shelf we just created -->
-      <!-- 
-           -->
       <request subst="true">
 	<dyn_variable name="on_shelf_id" re="[Ll]ocation: http://.*/(.*)\r"/>
         <http 	url="/on_shelves" 
@@ -150,8 +147,6 @@
       <thinktime value="2" random="true"></thinktime>
 
       <!-- comment on the book we just created-->
-      <!-- 
-           -->
       <request subst="true">
         <http 	url="/comments" 
 		method="POST"
@@ -161,9 +156,12 @@
       <!-- wait for up to 2 seconds -->
       <thinktime value="2" random="true"></thinktime>
 
+      <!-- view the community before leaving -->
+      <request>
+        <http url='/users' version='1.1' method='GET'></http>
+      </request>
+
       <!-- view feed before leaving -->
-      <!-- 
-           -->
       <request>
         <http url='/' version='1.1' method='GET'></http>
       </request>
@@ -172,8 +170,6 @@
       <thinktime value="2" random="true"></thinktime>
 
       <!-- remove the book from the shelf -->
-      <!-- 
-           -->
       <request subst="true">
         <http url="%%_root_url%%on_shelves/%%_on_shelf_id%%" method="DELETE">
         </http>
@@ -183,8 +179,6 @@
       <thinktime value="2" random="true"></thinktime>
 
       <!-- delete the shelf -->
-      <!-- 
-           -->
       <request subst="true">
         <http url="%%_root_url%%shelves/%%_shelf_id%%" method="DELETE">
         </http>
@@ -194,8 +188,6 @@
       <thinktime value="2" random="true"></thinktime>
 
       <!-- DELETE the user we just created -->
-      <!-- 
-           -->
       <request subst="true">
         <http url="%%_root_url%%users/%%_user_id%%" method="DELETE">
         </http>
