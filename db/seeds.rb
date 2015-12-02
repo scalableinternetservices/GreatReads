@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+PublicActivity.enabled = false
+
 User.delete_all
 Book.delete_all
 Following.delete_all
@@ -19,10 +21,15 @@ RECORD_COUNT_FACTOR = 3000
 
   puts "Working on user #{seed_id}"
 
+
   user = User.new
+  user.first = "first#{seed_id}"
+  user.last = "last#{seed_id}"
   user.email = "seeduser#{seed_id}@seeduser.com"
   user.password = "password"
   user.save!
+
+  current_user = user
 
   shelf= Shelf.new
   shelf.shelf_name = "seedshelf#{seed_id}"
