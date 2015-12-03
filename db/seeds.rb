@@ -6,65 +6,79 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.delete_all
-Book.delete_all
-Following.delete_all
-Comment.delete_all
-Shelf.delete_all
-OnShelf.delete_all
 
-RECORD_COUNT_FACTOR = 3000
-
-(1..RECORD_COUNT_FACTOR).each do |seed_id|
-
-  puts "Working on user #{seed_id}"
-
-  user = User.new
-  user.email = "seeduser#{seed_id}@seeduser.com"
-  user.password = "password"
-  user.save!
-
-  shelf= Shelf.new
-  shelf.shelf_name = "seedshelf#{seed_id}"
-  shelf.shelf_owner = user.id
-  shelf.save!
-
-  book = Book.new
-  book.title = "seedbook#{seed_id}"
-  book.save!
+begin
+  mutex = SeedMutex.create(acquired: true)
+rescue ActiveRecord::RecordNotUnique
+  mutex = nil
 end
 
-puts "done adding users. following & commenting"
+if mutex 
+  User.delete_all
+  Book.delete_all
+  Following.delete_all
+  Comment.delete_all
+  Shelf.delete_all
+  OnShelf.delete_all
 
-User.all.each do |user|
 
-  puts "doing commenting and following for user #{user.id}"
 
-  (RECORD_COUNT_FACTOR / 100.0).round.times do
-    user.following.build(:person_id => User.random.id).save
+  RECORD_COUNT_FACTOR = 3000
+
+  (1..RECORD_COUNT_FACTOR).each do |seed_id|
+
+    puts "Working on user #{seed_id}"
+
+    user = User.new
+    user.email = "seeduser#{seed_id}@seeduser.com"
+    user.password = "password"
+    user.save!
+
+    shelf= Shelf.new
+    shelf.shelf_name = "seedshelf#{seed_id}"
+    shelf.shelf_owner = user.id
+    shelf.save!
+
+    current_user = user
+
+    book = Book.new
+    book.title = "seedbook#{seed_id}"
+    book.save!
   end
 
-  comment = Comment.new
-  random_book_id = Book.random.id
-  comment.book_id = random_book_id
-  comment.author_id = user.id
-  comment.body = "seedcommentby#{user.id}onbook#{random_book_id}"
-  comment.save!
-end
+  puts "done adding users. following & commenting"
 
-puts "shelving books"
+  User.all.each do |user|
 
-Shelf.all.each do |shelf|
+    puts "doing commenting and following for user #{user.id}"
 
-  puts "placing books on shelf #{shelf.id}"
+    (RECORD_COUNT_FACTOR / 100.0).round.times do
+      user.following.build(:person_id => User.random.id).save
+    end
 
-  (RECORD_COUNT_FACTOR / 100.0 / 5.0).round.times do
-    on_shelf = OnShelf.new
-    on_shelf.shelf_id = shelf.id
-    on_shelf.book_id = Book.random.id
-    on_shelf.save!
+    comment = Comment.new
+    random_book_id = Book.random.id
+    comment.book_id = random_book_id
+    comment.author_id = user.id
+    comment.body = "seedcommentby#{user.id}onbook#{random_book_id}"
+    comment.save!
   end
-end
 
-puts "Done!"
+  puts "shelving books"
+
+  Shelf.all.each do |shelf|
+
+    puts "placing books on shelf #{shelf.id}"
+
+    (RECORD_COUNT_FACTOR / 100.0 / 5.0).round.times do
+      on_shelf = OnShelf.new
+      on_shelf.shelf_id = shelf.id
+      on_shelf.book_id = Book.random.id
+      on_shelf.save!
+    end
+  end
+
+  puts "Done!"
+
+end
 
