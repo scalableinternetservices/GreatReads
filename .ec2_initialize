@@ -1,4 +1,4 @@
 sudo yum install -y patch
 sudo yum install -y mysql
 mysqld &
-
+sleep 1 && mysql -e 'create database great_reads_production'
