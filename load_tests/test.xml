@@ -44,6 +44,9 @@
    <arrivalphase phase="10" duration="30" unit="second">
      <users arrivalrate="512" unit="second"></users>
    </arrivalphase>
+   <arrivalphase phase="11" duration="30" unit="second">
+     <users arrivalrate="1024" unit="second"></users>
+   </arrivalphase>
   </load>
 
   <options>
