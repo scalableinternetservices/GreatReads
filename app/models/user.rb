@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :following, :class_name => 'Following', :foreign_key => 'follower_id'
   has_many :shelves, :class_name => 'Shelf', :foreign_key => 'shelf_owner'
   has_many :quotes, dependent: :destroy
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "http://icons.iconarchive.com/icons/hopstarter/face-avatars/256/Male-Face-J3-icon.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   def follows?(other_user)
     self.following.find_by person_id: other_user.id
@@ -24,6 +26,7 @@ class User < ActiveRecord::Base
   #     ).uniq.sort { |a, b| a.created_at <=> b.created_at }
   #   end
   # end
+
 
   def self.random
     User.offset(rand(User.count)).first

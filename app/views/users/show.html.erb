@@ -1,13 +1,14 @@
 <%= render :partial => "layouts/navbar" %>
 
 <div class="ui text container">
-  
+
   <%= link_to 'Edit', edit_user_path(@user) %> |
   <%= link_to 'Back', users_path %>
-
   <%= render "profile", user: @user %>
+
+  <img src="<%= @user.avatar.url %>" alt="">
   <p>
-    
+
     <% if current_user %>
     <%= form_for(Shelf.new) do |f| %>
     <div class="field">
@@ -26,5 +27,7 @@
     Shelf:
     <%= link_to shelf.shelf_name, shelf %>
     <%end%>
+
+    <%= will_paginate @shelves %>
   </p>
 </div>

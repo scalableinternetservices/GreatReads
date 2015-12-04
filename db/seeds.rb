@@ -15,7 +15,7 @@ Comment.delete_all
 Shelf.delete_all
 OnShelf.delete_all
 
-RECORD_COUNT_FACTOR = 3000
+RECORD_COUNT_FACTOR = 50
 
 (1..RECORD_COUNT_FACTOR).each do |seed_id|
 
@@ -74,4 +74,3 @@ Shelf.all.each do |shelf|
 end
 
 puts "Done!"
-

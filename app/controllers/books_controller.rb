@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = Book.paginate(:page => params[:page], :per_page => 4)
     @book = Book.new
   end
 
@@ -13,7 +13,7 @@ class BooksController < ApplicationController
   def show
     @followings = Following.where(follower_id: current_user.id)
 
-    @comments = Comment.where(book_id: params[:id])
+    @comments = Comment.where(book_id: params[:id]).paginate(:page => params[:page], :per_page => 4)
     @new_comment = Comment.new(book_id: params[:id])
 
     @quotes = Quote.where(book_id: params[:id])
@@ -21,7 +21,8 @@ class BooksController < ApplicationController
       book_id: params[:id]
     )
 
-    @shelves = Shelf.where(shelf_owner: current_user.id)
+    @shelves = Shelf.where(shelf_owner: current_user.id).paginate(:page => params[:page], :per_page => 4)
+
     @new_onshelf = OnShelf.new(
         book_id: params[:id],
     )

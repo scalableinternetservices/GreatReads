@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201052429) do
+ActiveRecord::Schema.define(version: 20151204085727) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -93,6 +93,10 @@ ActiveRecord::Schema.define(version: 20151201052429) do
     t.string   "last_sign_in_ip"
     t.string   "first"
     t.string   "last"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -27,6 +27,7 @@
         </div>
         
       </div>
+
       
       <div class="field">
         <div class="ui left icon input">
@@ -40,6 +41,10 @@
           <i class="lock icon"></i> 
           <%= f.password_field :password, autocomplete: "off", :placeholder => "Password (8 characters minimum)" %>
         </div>
+      </div>
+      <div class="field">
+        <%= f.label :avatar %>
+        <%= f.file_field :avatar %>
       </div>
       <%= f.submit "Sign up", class: "ui fluid large submit button" %>
     </div>

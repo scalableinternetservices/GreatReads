@@ -1,6 +1,11 @@
 @import "settings";
 @import "mixins";
 
+.ui.feed>.event>.label img {
+	height: 33px !important;
+	width: 35px !important;
+}
+
 button.ui.button {
 	@include hoverActiveFocus(background, $color4);
 	background: $color3;
