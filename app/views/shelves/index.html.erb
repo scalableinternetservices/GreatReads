@@ -1,19 +1,22 @@
+<%= render :partial => "layouts/navbar", :locals => { :active => "books" } %>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Shelves</h1>
+<div class="ui text container">
 
-<table>
-  <thead>
-    <tr>
-      <th>Shelf</th>
-      <th>Shelf name</th>
-      <th>Shelf owner</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <h1>Listing Shelves</h1>
 
-  <tbody>
-    <% @shelves.each do |shelf| %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Owner</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @shelves.each do |shelf| %>
       <tr>
         <td><%= shelf.shelf_name %></td>
         <td><%= shelf.shelf_owner %></td>
@@ -21,10 +24,12 @@
         <td><%= link_to 'Edit', edit_shelf_path(shelf) %></td>
         <td><%= link_to 'Destroy', shelf, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      <% end %>
+    </tbody>
+  </table>
 
-<br>
+  <br>
 
-<%= link_to 'New Shelf', new_shelf_path %>
+  <%= link_to 'New Shelf', new_shelf_path %>
+
+</div>

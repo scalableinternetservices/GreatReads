@@ -10,10 +10,16 @@ class ShelvesController < ApplicationController
   # GET /shelves/1
   # GET /shelves/1.json
   def show
-    @on_shelves = OnShelf.where(book_id: params[:id])
+    # @on_shelves = OnShelf.where(book_id: params[:id])
+    # @book_ids = @on_shelves.map { |onshelf| onshelf.book_id }
+    # @books = Book.where(id: @book_ids)
+
+    @on_shelves = OnShelf.where(shelf_id: @shelf.id)
     @book_ids = @on_shelves.map { |onshelf| onshelf.book_id }
     @books = Book.where(id: @book_ids)
-    end
+
+
+  end
 
   # GET /shelves/new
   def new
@@ -74,4 +80,4 @@ class ShelvesController < ApplicationController
     def shelf_params
       params.require(:shelf).permit(:shelf_id, :shelf_name, :shelf_owner)
     end
-end
+  end
