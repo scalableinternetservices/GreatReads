@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204213036) do
+ActiveRecord::Schema.define(version: 20151204230215) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20151204213036) do
     t.datetime "avatar_updated_at"
     t.string   "title"
     t.string   "story"
+    t.string   "genre"
   end
 
   create_table "comments", force: :cascade do |t|

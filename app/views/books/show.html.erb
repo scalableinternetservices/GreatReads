@@ -5,7 +5,7 @@
 <div class="ui text container" style="margin-top: 50px;">
 
 	<h1><a style="background: #F2E6B6; padding: 5px 10px; color: #8F9E8B; font-weight: bold; font-size: 0.8em;" href = "<%= books_path %>"><i style="color: #8F9E8B;" class="fa fa-chevron-left"></i>&nbsp;BACK</a></h1>
-	<h1 style="font-size: 2.8em; color: #F2E6B6"> <%= @book.title %></h1>
+	<h1 style="font-size: 2.8em; color: #F2E6B6"> <%= @book.title %> <span style="color: whitesmoke;">| <%= @book.genre %></span></h1>
 	<%= rating_for @book, "greatness" %>
 	<div style="height: 350px; width: 100%; background: url('<%= @book.avatar.url %>'); background-size: cover; "></div>
 	

@@ -13,7 +13,7 @@
       <div class="content">
         <div class="header"><%=link_to book.title, book %> </div>
         <div class="meta">
-          <a>Genre</a>
+          <a><%= book.genre %></a>
         </div>
         <!-- <div class="description">
           < %= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -60,6 +60,10 @@
   <div class="field">
     <%= f.label :avatar %>
     <%= f.file_field :avatar %>
+  </div>
+  <div class="field">
+    <%= f.label :genre %>
+    <%= f.text_area :genre %>
   </div>
   <div class="field">
     <%= f.label :story %>
