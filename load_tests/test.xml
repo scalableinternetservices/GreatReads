@@ -47,6 +47,12 @@
    <arrivalphase phase="11" duration="30" unit="second">
      <users arrivalrate="1024" unit="second"></users>
    </arrivalphase>
+<<<<<<< Updated upstream
+=======
+   <arrivalphase phase="12" duration="30" unit="second">
+     <users arrivalrate="2048" unit="second"></users>
+   </arrivalphase>
+>>>>>>> Stashed changes
   </load>
 
   <options>
